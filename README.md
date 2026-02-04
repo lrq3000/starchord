@@ -36,6 +36,30 @@ Build and install
 1. Make sure an Android device is connected (either connect your phone via USB, or run an emulator)
 2. hit the green 'play' button in the top left of the IDE!
 
+Based on the source code, here is how you can add new instruments and the expected file format:
+
+### How to Add New Instruments
+To add a new instrument, you need to create a specific folder structure on your device's external storage (SD card):
+
+1.  **Create a Folder:** Create a folder inside `hexiano/` on your external storage (e.g., `/sdcard/hexiano/MyNewInstrument/`). The name of this folder will be the name of the instrument in the app.
+2.  **Add Audio Files:** Place your audio samples inside this folder.
+
+### Expected File Type & Naming Convention
+The app uses a strict **filename pattern** to identify the note and velocity of each sample. It uses Android's `SoundPool` to load the files, so standard audio formats like **WAV**, **OGG**, or **MP3** should work, provided they follow this naming convention:
+
+**Pattern:** `...m<MidiNote>v<Velocity>.<extension>`
+
+*   **`m`**: Must be followed by the MIDI note number (e.g., `m60` for Middle C).
+*   **`v`** (Optional): Can be followed by the velocity/volume (e.g., `v100`). If omitted, it defaults to a standard velocity.
+*   **Examples:**
+    *   `piano_m60.wav` (Middle C)
+    *   `guitar_m50v127.ogg` (Note 50 with max velocity)
+
+**Source Code Reference:**
+The logic is defined in `GenericInstrument.java`, specifically in the constructor which scans the directory and matches files against this regex:
+```java
+Pattern pat = Pattern.compile("m([0-9]+)(v([0-9]+))?.*\\.[^\\.]*$");
+```
 
 Project architecture
 ----------------------------
