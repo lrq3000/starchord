@@ -272,7 +272,7 @@ public class HexKeyboard extends View
 			Log.d("setUp"+board+"Board", "rowCount: " + mRowCount);
 			Log.d("setUp"+board+"Board", "columnCount: " + mColumnCount);
 	
-			int y = 0;
+			int y = mTileWidth / 2;
 			pitch += pitchvpre;
 			int rowFirstPitch = pitch;
 
@@ -448,7 +448,7 @@ public class HexKeyboard extends View
 			Log.d("setUp"+board+"Board", "rowCount: " + mRowCount);
 			Log.d("setUp"+board+"Board", "columnCount: " + mColumnCount);
 			
-			int y = mTileRadius;
+			int y = (int) Math.ceil(2.5 * mTileRadius);
 			
 			pitch += pitchhpre;
 			int rowFirstPitch = pitch;
