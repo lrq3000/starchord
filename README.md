@@ -44,7 +44,7 @@ To add a new instrument, you need to create a specific folder structure on your 
 1.  **Create a Folder:** Create a folder inside `hexiano/` on your external storage (e.g., `/sdcard/hexiano/MyNewInstrument/`). The name of this folder will be the name of the instrument in the app.
 2.  **Add Audio Files:** Place your audio samples inside this folder.
 
-### Expected File Type & Naming Convention
+**Expected File Type & Naming Convention**
 The app uses a strict **filename pattern** to identify the note and velocity of each sample. It uses Android's `SoundPool` to load the files, so standard audio formats like **WAV**, **OGG**, or **MP3** should work, provided they follow this naming convention:
 
 **Pattern:** `...m<MidiNote>v<Velocity>.<extension>`
@@ -54,6 +54,8 @@ The app uses a strict **filename pattern** to identify the note and velocity of 
 *   **Examples:**
     *   `piano_m60.wav` (Middle C)
     *   `guitar_m50v127.ogg` (Note 50 with max velocity)
+
+You can extract these files from `.sf2` or `.sfz` soundfonts using dedicated softwares.
 
 **Source Code Reference:**
 The logic is defined in `GenericInstrument.java`, specifically in the constructor which scans the directory and matches files against this regex:
