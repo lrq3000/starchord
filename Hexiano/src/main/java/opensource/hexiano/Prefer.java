@@ -531,6 +531,33 @@ public class Prefer extends PreferenceActivity
 			}
 		);
 		// </ugly>
+
+		Preference.OnPreferenceChangeListener octaveChangeListener = new Preference.OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				if (newValue instanceof String) {
+					try {
+						int octave = Integer.parseInt((String) newValue);
+						if (octave >= 8) {
+							Toast.makeText(getBaseContext(), "Warning: Octaves >= 8 may require sound extrapolation.", Toast.LENGTH_LONG).show();
+						}
+					} catch (NumberFormatException e) {
+						// Ignore
+					}
+				}
+				return true;
+			}
+		};
+
+		Preference jammerOctave = findPreference("baseJammerOctave");
+		if (jammerOctave != null) {
+			jammerOctave.setOnPreferenceChangeListener(octaveChangeListener);
+		}
+
+		Preference jankoOctave = findPreference("baseJankoOctave");
+		if (jankoOctave != null) {
+			jankoOctave.setOnPreferenceChangeListener(octaveChangeListener);
+		}
 	}
 	
 	public static String getMultiInstrumentsConf(SharedPreferences mPrefs) {
