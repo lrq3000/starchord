@@ -52,6 +52,8 @@ import java.util.Iterator;
 import java.util.TreeMap;
 
 import android.view.WindowManager;
+import android.os.Build;
+import android.view.WindowInsets;
 
 public class HexKeyboard extends View 
 {
@@ -932,6 +934,20 @@ public class HexKeyboard extends View
 
 		mDisplayWidth = width;
 		mDisplayHeight = height;
+
+		if (Build.VERSION.SDK_INT >= 20) {
+			setOnApplyWindowInsetsListener(new OnApplyWindowInsetsListener() {
+				@Override
+				public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
+					v.setPadding(
+							insets.getSystemWindowInsetLeft(),
+							insets.getSystemWindowInsetTop(),
+							insets.getSystemWindowInsetRight(),
+							insets.getSystemWindowInsetBottom());
+					return insets.consumeSystemWindowInsets();
+				}
+			});
+		}
 	}
 
 	private int getLowerBound (int x, int y)
@@ -1047,6 +1063,23 @@ public class HexKeyboard extends View
 	}
 
 	@Override
+	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+		super.onLayout(changed, left, top, right, bottom);
+		int w = right - left;
+		int h = bottom - top;
+		int newDisplayWidth = w - getPaddingLeft() - getPaddingRight();
+		int newDisplayHeight = h - getPaddingTop() - getPaddingBottom();
+
+		if (newDisplayWidth > 0 && newDisplayHeight > 0 &&
+				(newDisplayWidth != mDisplayWidth || newDisplayHeight != mDisplayHeight)) {
+			Log.d("HexKeyboard", "onLayout: screen size changed, reloading board. Old: " + mDisplayWidth + "x" + mDisplayHeight + " New: " + newDisplayWidth + "x" + newDisplayHeight);
+			mDisplayWidth = newDisplayWidth;
+			mDisplayHeight = newDisplayHeight;
+			setUpBoard(mScreenOrientationId);
+		}
+	}
+
+	@Override
 	public void onDraw(Canvas canvas)
 	{ 
 		Canvas tempCanvas = new Canvas(mBitmap);
@@ -1054,7 +1087,7 @@ public class HexKeyboard extends View
 		{
 			k.paint(tempCanvas);
 		}
-		canvas.drawBitmap(mBitmap, 0, 0, null);
+		canvas.drawBitmap(mBitmap, getPaddingLeft(), getPaddingTop(), null);
 
 		mLastRedrawTime = SystemClock.uptimeMillis();
 		Log.d("onDraw", "Last redraw: " + mLastRedrawTime);
@@ -1086,8 +1119,8 @@ public class HexKeyboard extends View
 			HexKey key = mKeys.get(i);
 			for (int pointerIndex = 0; pointerIndex < event.getPointerCount(); pointerIndex++)
 			{
-				int x = (int)event.getX(pointerIndex);
-				int y = (int)event.getY(pointerIndex);
+				int x = (int)event.getX(pointerIndex) - getPaddingLeft();
+				int y = (int)event.getY(pointerIndex) - getPaddingTop();
 				if (key.contains(x, y))
 				{
 					/*
