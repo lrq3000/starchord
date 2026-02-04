@@ -876,11 +876,18 @@ public class HexKeyboard extends View
 		// Old inefficient way of creating a bitmap
 		//mBitmap = Bitmap.createBitmap(canvasWidth, canvasHeight, Bitmap.Config.ARGB_8888);
 		// New efficient way of creating a bitmap: load it from a dummy resource image (see http://stackoverflow.com/a/8527745/1121352 )
+		if (mBitmap != null && !mBitmap.isRecycled()) {
+			mBitmap.recycle();
+			mBitmap = null;
+		}
 		BitmapFactory.Options options=new BitmapFactory.Options();
 		options.inSampleSize = 8;
 		options.inPurgeable = true;
 		Bitmap resImage = BitmapFactory.decodeResource(getResources(), R.drawable.dummy, options);
 		mBitmap = Bitmap.createScaledBitmap(resImage, canvasWidth, canvasHeight, false);
+		if (resImage != null && !resImage.isRecycled()) {
+			resImage.recycle();
+		}
 		// Setup the bitmap
 		mBitmap.eraseColor(mKeys.get(0).mBlankColor);
 		Canvas tempCanvas = new Canvas(mBitmap);
