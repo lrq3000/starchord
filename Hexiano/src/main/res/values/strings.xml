@@ -98,9 +98,9 @@
 	<string name="default_sonome_note">E</string>
 	<string name="default_sonome_octave">1</string>
 	<string name="default_jammer_note">F#</string>
-	<string name="default_jammer_octave">6</string>
+	<string name="default_jammer_octave">8</string>
 	<string name="default_janko_note">F</string>
-	<string name="default_janko_octave">5</string>
+	<string name="default_janko_octave">8</string>
 	<string name="default_janko_row_count">4</string>
 	<string name="default_sonome_orientation">Portrait</string>
 	<string name="default_jammer_orientation">Landscape</string>
