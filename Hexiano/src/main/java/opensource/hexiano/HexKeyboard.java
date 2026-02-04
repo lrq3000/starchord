@@ -80,7 +80,7 @@ public class HexKeyboard extends View
 	static boolean mSustainHold = true; // hold sustain (when you release the key, you will have to press it twice to disable sustain)
 	static boolean mSustainAlwaysOn = false; // sustain is always enabled (sustain key will then be used to stop the previously sustained notes)
 	// Modifier keys state
-	static boolean mSustain = false; // current state of sustain key (pressed or not) - this state is separate from SustainAlwaysOn
+	static boolean mSustain = true; // current state of sustain key (pressed or not) - this state is separate from SustainAlwaysOn
 
 	static Set<Integer> old_pressed = new HashSet<Integer>();
 
@@ -897,14 +897,15 @@ public class HexKeyboard extends View
 	// Replace the first keys by modifier keys
 	private void setUpModifierKeys() {
 		// Sustain key
-		mKeys.set(0, new SustainKey(
+		SustainKey sk = new SustainKey(
 				mContext,
 				mTileRadius,
 				mKeys.get(0).mCenter,
 				64, // useless, set directly in SustainKey class
 				null, // null?
-				1) // id of the key, used only as a label if set in config
-		);
+				1); // id of the key, used only as a label if set in config
+		sk.setPressed(mSustain);
+		mKeys.set(0, sk);
 	}
 
 	public HexKeyboard(Context context)
