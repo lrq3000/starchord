@@ -52,6 +52,8 @@ import java.util.Iterator;
 import java.util.TreeMap;
 
 import android.view.WindowManager;
+import android.os.Build;
+import android.view.WindowInsets;
 
 public class HexKeyboard extends View 
 {
@@ -78,7 +80,7 @@ public class HexKeyboard extends View
 	static boolean mSustainHold = true; // hold sustain (when you release the key, you will have to press it twice to disable sustain)
 	static boolean mSustainAlwaysOn = false; // sustain is always enabled (sustain key will then be used to stop the previously sustained notes)
 	// Modifier keys state
-	static boolean mSustain = true; // current state of sustain key (pressed or not) - this state is separate from SustainAlwaysOn
+	static boolean mSustain = false; // current state of sustain key (pressed or not) - this state is separate from SustainAlwaysOn
 
 	static Set<Integer> old_pressed = new HashSet<Integer>();
 
@@ -270,7 +272,7 @@ public class HexKeyboard extends View
 			Log.d("setUp"+board+"Board", "rowCount: " + mRowCount);
 			Log.d("setUp"+board+"Board", "columnCount: " + mColumnCount);
 	
-			int y = 0;
+			int y = mTileWidth / 2;
 			pitch += pitchvpre;
 			int rowFirstPitch = pitch;
 
@@ -446,7 +448,7 @@ public class HexKeyboard extends View
 			Log.d("setUp"+board+"Board", "rowCount: " + mRowCount);
 			Log.d("setUp"+board+"Board", "columnCount: " + mColumnCount);
 			
-			int y = mTileRadius;
+			int y = (int) Math.ceil(2.5 * mTileRadius);
 			
 			pitch += pitchhpre;
 			int rowFirstPitch = pitch;
@@ -874,11 +876,18 @@ public class HexKeyboard extends View
 		// Old inefficient way of creating a bitmap
 		//mBitmap = Bitmap.createBitmap(canvasWidth, canvasHeight, Bitmap.Config.ARGB_8888);
 		// New efficient way of creating a bitmap: load it from a dummy resource image (see http://stackoverflow.com/a/8527745/1121352 )
+		if (mBitmap != null && !mBitmap.isRecycled()) {
+			mBitmap.recycle();
+			mBitmap = null;
+		}
 		BitmapFactory.Options options=new BitmapFactory.Options();
 		options.inSampleSize = 8;
 		options.inPurgeable = true;
 		Bitmap resImage = BitmapFactory.decodeResource(getResources(), R.drawable.dummy, options);
 		mBitmap = Bitmap.createScaledBitmap(resImage, canvasWidth, canvasHeight, false);
+		if (resImage != null && !resImage.isRecycled()) {
+			resImage.recycle();
+		}
 		// Setup the bitmap
 		mBitmap.eraseColor(mKeys.get(0).mBlankColor);
 		Canvas tempCanvas = new Canvas(mBitmap);
@@ -888,15 +897,14 @@ public class HexKeyboard extends View
 	// Replace the first keys by modifier keys
 	private void setUpModifierKeys() {
 		// Sustain key
-		SustainKey sk = new SustainKey(
+		mKeys.set(0, new SustainKey(
 				mContext,
 				mTileRadius,
 				mKeys.get(0).mCenter,
 				64, // useless, set directly in SustainKey class
 				null, // null?
-				1); // id of the key, used only as a label if set in config
-		sk.setPressed(mSustain);
-		mKeys.set(0, sk);
+				1) // id of the key, used only as a label if set in config
+		);
 	}
 
 	public HexKeyboard(Context context)
@@ -932,6 +940,20 @@ public class HexKeyboard extends View
 
 		mDisplayWidth = width;
 		mDisplayHeight = height;
+
+		if (Build.VERSION.SDK_INT >= 20) {
+			setOnApplyWindowInsetsListener(new OnApplyWindowInsetsListener() {
+				@Override
+				public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
+					v.setPadding(
+							insets.getSystemWindowInsetLeft(),
+							insets.getSystemWindowInsetTop(),
+							insets.getSystemWindowInsetRight(),
+							insets.getSystemWindowInsetBottom());
+					return insets.consumeSystemWindowInsets();
+				}
+			});
+		}
 	}
 
 	private int getLowerBound (int x, int y)
@@ -1047,14 +1069,35 @@ public class HexKeyboard extends View
 	}
 
 	@Override
-	public void onDraw(Canvas canvas)
-	{ 
+	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+		super.onLayout(changed, left, top, right, bottom);
+		int w = right - left;
+		int h = bottom - top;
+		int newDisplayWidth = w - getPaddingLeft() - getPaddingRight();
+		int newDisplayHeight = h - getPaddingTop() - getPaddingBottom();
+
+		if (newDisplayWidth > 0 && newDisplayHeight > 0 &&
+				(newDisplayWidth != mDisplayWidth || newDisplayHeight != mDisplayHeight)) {
+			Log.d("HexKeyboard", "onLayout: screen size changed, reloading board. Old: " + mDisplayWidth + "x" + mDisplayHeight + " New: " + newDisplayWidth + "x" + newDisplayHeight);
+			mDisplayWidth = newDisplayWidth;
+			mDisplayHeight = newDisplayHeight;
+			setUpBoard(mScreenOrientationId);
+		}
+	}
+
+	private void updateBitmap() {
 		Canvas tempCanvas = new Canvas(mBitmap);
 		for (HexKey k : mKeys)
 		{
 			k.paint(tempCanvas);
 		}
-		canvas.drawBitmap(mBitmap, 0, 0, null);
+	}
+
+	@Override
+	public void onDraw(Canvas canvas)
+	{
+		updateBitmap();
+		canvas.drawBitmap(mBitmap, getPaddingLeft(), getPaddingTop(), null);
 
 		mLastRedrawTime = SystemClock.uptimeMillis();
 		Log.d("onDraw", "Last redraw: " + mLastRedrawTime);
@@ -1086,8 +1129,8 @@ public class HexKeyboard extends View
 			HexKey key = mKeys.get(i);
 			for (int pointerIndex = 0; pointerIndex < event.getPointerCount(); pointerIndex++)
 			{
-				int x = (int)event.getX(pointerIndex);
-				int y = (int)event.getY(pointerIndex);
+				int x = (int)event.getX(pointerIndex) - getPaddingLeft();
+				int y = (int)event.getY(pointerIndex) - getPaddingTop();
 				if (key.contains(x, y))
 				{
 					/*
