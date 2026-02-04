@@ -35,7 +35,7 @@
 			<PreferenceScreen android:title="Modifier Keys">
 			    <CheckBoxPreference android:key="hideModifierKeys" android:defaultValue="false" android:title="@string/prompt_hide_modifiers" android:summary="@string/summary_hide_modifiers"/>
 			    <CheckBoxPreference android:key="sustainHold" android:defaultValue="true" android:title="@string/prompt_hold_sustain" android:summary="@string/summary_hold_sustain"/>
-			    <CheckBoxPreference android:key="sustainAlwaysOn" android:defaultValue="true" android:title="@string/prompt_sustain_always_on" android:summary="@string/summary_sustain_always_on"/>
+			    <CheckBoxPreference android:key="sustainAlwaysOn" android:defaultValue="false" android:title="@string/prompt_sustain_always_on" android:summary="@string/summary_sustain_always_on"/>
 			</PreferenceScreen>
 			<PreferenceScreen android:title="Velocity">
 				<CheckBoxPreference android:key="velocityEnabled" android:defaultValue="false" android:title="@string/prompt_velocity_enabled" android:summary="@string/summary_velocity_enabled"/>
