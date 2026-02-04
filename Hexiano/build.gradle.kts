@@ -11,8 +11,8 @@ android {
         applicationId = "opensource.hexiano.Play"
         minSdk = 8
         targetSdk = 34
-        versionCode = 10102    // MUST be an Integer (e.g., 1, 2, 100, 10101 - use 10101 to mimic semantic versioning by using 0 as a dot)
-        versionName = "1.1.2"  // CAN be a String (e.g., "1.1.1", "2.0-beta" - can follow semantic versioning)
+        versionCode = 10103    // MUST be an Integer (e.g., 1, 2, 100, 10101 - use 10101 to mimic semantic versioning by using 0 as a dot)
+        versionName = "1.1.3"  // CAN be a String (e.g., "1.1.1", "2.0-beta" - can follow semantic versioning)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
