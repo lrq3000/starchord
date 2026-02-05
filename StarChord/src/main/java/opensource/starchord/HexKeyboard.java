@@ -756,6 +756,16 @@ public class HexKeyboard extends View
 			key.stop(true);
 		}
 	}
+
+	// Stop playing all sounds but keep modifier keys active
+	static public void stopAllNotes()
+	{
+		for(HexKey key : HexKeyboard.mKeys ) {
+			if (!(key instanceof ModifierKey)) {
+				key.stop(true);
+			}
+		}
+	}
 	
 	private int getModifierKeysCount() {
 		return 1; // only Sustain key for now
