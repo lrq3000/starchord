@@ -558,6 +558,11 @@ public class Prefer extends PreferenceActivity
 		if (jankoOctave != null) {
 			jankoOctave.setOnPreferenceChangeListener(octaveChangeListener);
 		}
+
+		Preference customOctave = findPreference("baseCustomOctave");
+		if (customOctave != null) {
+			customOctave.setOnPreferenceChangeListener(octaveChangeListener);
+		}
 	}
 	
 	public static String getMultiInstrumentsConf(SharedPreferences mPrefs) {

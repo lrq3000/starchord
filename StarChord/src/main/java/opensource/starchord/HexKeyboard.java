@@ -175,55 +175,11 @@ public class HexKeyboard extends View
 		int pitch = Note.getNoteNumber(firstNote, firstOctave);
 		int keyCount = 0;
 		
-		// For Janko only
-		String groupSizeStr = mPrefs.getString("jankoRowCount", null);
-		groupSizeStr.replaceAll("[^0-9]", "");
-		if (groupSizeStr.length() == 0)
-		{
-			groupSizeStr = "4";
-		}
-	    int groupSize = Integer.parseInt(groupSizeStr);
-	  
-	    int groupCount = mColumnCount / groupSize;
-	    if (mColumnCount % groupSize > 0)
-	    {
-	    	groupCount++;
-	    }
+        LayoutStrategy strategy = LayoutStrategies.getStrategy(mContext);
+        String orientation = HexKey.getKeyOrientation(mContext);
+        LayoutStrategy.Parameters params = strategy.getParameters(mContext, mPrefs, orientation, mRowCount, mColumnCount);
 
-		// Setup notes progression for boards
-		int pitchvpre = 0;
-		int pitchv1 = 0;
-		int pitchv2 = 0;
-		int pitchvpost = 0;
-		int pitchhpre = 0;
-		int pitchh1 = 0;
-		int pitchh2 = 0;
-		int pitchhpost = 0;
-		if (board.equals("Jammer")) {
-			pitchv1 = -5;
-			pitchv2 = -7;
-			pitchvpost = -2; // Down a full tone.
-			pitchhpre = -(mRowCount - 1) * 2;
-			pitchh1 = -5;
-			pitchh2 = 7;
-			pitchhpost = -12; // Down a full tone.
-		} else if (board.equals("Sonome")) {
-			pitchvpre = (mRowCount - 1) * 7;
-			pitchv1 = 4;
-			pitchv2 = -3;
-			pitchvpost = -7; // Down a fifth.
-			pitchh1 = 4;
-			pitchh2 = 3;
-			pitchhpost = 1; // Up a semitone.
-		} else if (board.equals("Janko")) {
-			pitch -= (mColumnCount - 1) * 2 - 1;
-			pitchvpre = -(groupCount - 1) * 12;
-			pitchv1 = -1;
-			pitchv2 = 1;
-			pitchvpost = 2;
-			pitchh1 = 1;
-			pitchh2 = 1;
-		}
+        pitch += params.initialPitchOffset;
 		
 		// Setup single instrument and multi-instruments
 		boolean soundsLimitRange = mPrefs.getBoolean("soundsLimitRange", true);
@@ -265,7 +221,7 @@ public class HexKeyboard extends View
 		}
 		
 
-		if (HexKey.getKeyOrientation(mContext).equals("Vertical"))
+		if (orientation.equals("Vertical"))
 		{
 			Log.d("setUp"+board+"Board", "orientation: vertical");
 			Log.d("setUp"+board+"Board", "pitch: " + pitch);
@@ -273,7 +229,7 @@ public class HexKeyboard extends View
 			Log.d("setUp"+board+"Board", "columnCount: " + mColumnCount);
 	
 			int y = mTileWidth / 2;
-			pitch += pitchvpre;
+			pitch += params.pitchPre;
 			int rowFirstPitch = pitch;
 
 			for (int j = 0; j < mRowCount; j++)
@@ -281,7 +237,7 @@ public class HexKeyboard extends View
 				int x = mTileRadius;
 				
 				int octaveGroupNumber = 0; // for Janko only
-			    int jankoColumnNumber = 0; // for Janko only
+			    int colCounter = 0;
 
 				for (int i = 0; i < mColumnCount; i++)
 				{
@@ -312,50 +268,30 @@ public class HexKeyboard extends View
 					int kittyCornerX = (int)Math.round(x - mTileRadius * 1.5);
 					int kittyCornerY = y + mTileWidth/2;
 					
-					HexKey kittyCornerKey = null;
-					if (board.equals("Jammer")) {
-						kittyCornerKey = new JammerKey(
+					HexKey kittyCornerKey = strategy.createKey(
 								mContext,
 								mTileRadius,
 								new Point(kittyCornerX, kittyCornerY),
 								ipitch,
-								instru,
-								++keyCount);
-					} else if (board.equals("Sonome")) {
-						kittyCornerKey = new SonomeKey(
-								mContext,
-								mTileRadius,
-								new Point(kittyCornerX, kittyCornerY),
-								ipitch,
-								instru,
-								++keyCount);
-					} else if (board.equals("Janko")) {
-						kittyCornerKey = new JankoKey(
-								mContext,
-								mTileRadius,
-								new Point(kittyCornerX, kittyCornerY),
-								ipitch + 12 * octaveGroupNumber,
 								instru,
 								++keyCount,
-								octaveGroupNumber);
-					}
+                                octaveGroupNumber);
 
 					if (kittyCornerKey.isKeyVisible()) {
 						mKeys.add(kittyCornerKey);
 						Log.d("HexKeyboard::setUpKeyBoard", "setUpKeyBoard Key: " + Integer.toString(keyCount-1) + " kittyCornerKey i/j " + Integer.toString(i) + "/" + Integer.toString(j));
 						// Limit sounds range: add this pitch (midiNoteNumber) to the list of notes to keep (notes that are visible on screen)
-						if (board.equals("Janko")) {
-							miRangeLimits.get(instruName).add(ipitch + 12 * octaveGroupNumber);
-						} else {
-							miRangeLimits.get(instruName).add(ipitch);
-						}
+						miRangeLimits.get(instruName).add(kittyCornerKey.mMidiNoteNumber); // Use the created key's note number
 					} else {
 						--keyCount;
 					}
-					pitch += pitchv1;
+					pitch += params.pitch1;
 					
-					jankoColumnNumber++; // for Janko only
-					if (jankoColumnNumber % groupSize == 0) octaveGroupNumber++; // for Janko only
+					colCounter++;
+					if (params.groupSize > 0 && colCounter % params.groupSize == 0) {
+                        octaveGroupNumber++;
+                        pitch += params.groupJumpPitch;
+                    }
 					
 					// Setup instrument to load for the next key
 					instru = null;
@@ -381,64 +317,37 @@ public class HexKeyboard extends View
 					}
 
 					// Setup key
-					HexKey key = null;
-					if (board.equals("Jammer")) {
-						key = new JammerKey(
+					HexKey key = strategy.createKey(
 								mContext,
 								mTileRadius,
 								new Point(x, y),
 								ipitch,
-								instru,
-								++keyCount);
-					} else if (board.equals("Sonome")) {
-						key = new SonomeKey(
-								mContext,
-								mTileRadius,
-								new Point(x, y),
-								ipitch,
-								instru,
-								++keyCount);
-					} else if (board.equals("Janko")) {
-						key = new JankoKey(
-								mContext,
-								mTileRadius,
-								new Point(x, y),
-								ipitch + 12 * octaveGroupNumber,
 								instru,
 								++keyCount,
-								octaveGroupNumber);
-					}
+                                octaveGroupNumber);
 
 					if (key.isKeyVisible()) {
 						mKeys.add(key);
 						Log.d("HexKeyboard::setUpKeyBoard", "setUpKeyBoard Key: " + Integer.toString(keyCount-1) + " key i/j " + Integer.toString(i) + "/" + Integer.toString(j));
 						// Limit sounds range: add this pitch (midiNoteNumber) to the list of notes to keep (notes that are visible on screen)
-						if (board.equals("Janko")) {
-							miRangeLimits.get(instruName).add(ipitch + 12 * octaveGroupNumber);
-						} else {
-							miRangeLimits.get(instruName).add(ipitch);
-						}
+						miRangeLimits.get(instruName).add(key.mMidiNoteNumber);
 					} else {
 						--keyCount;
 					}
-					pitch += pitchv2;
+					pitch += params.pitch2;
 					
-					jankoColumnNumber++; // for Janko only
-					if (jankoColumnNumber % groupSize == 0) octaveGroupNumber++; // for Janko only
+					colCounter++;
+					if (params.groupSize > 0 && colCounter % params.groupSize == 0) {
+                        octaveGroupNumber++;
+                        pitch += params.groupJumpPitch;
+                    }
 
 					x += 3 * mTileRadius;
 				}
 
-				pitch = rowFirstPitch + pitchvpost;
+				pitch = rowFirstPitch + params.pitchPost;
 				rowFirstPitch = pitch;
 				y += mTileWidth;
-				
-				/* if (board.equals("Janko") && jankoRowNumber % groupSize == 0)
-				{
-				    pitch -= 12;
-				    rowFirstPitch = pitch;
-			    	octaveGroupNumber++;
-				} */
 			}
 		}
 		else
@@ -450,11 +359,11 @@ public class HexKeyboard extends View
 			
 			int y = (int) Math.ceil(2.5 * mTileRadius);
 			
-			pitch += pitchhpre;
+			pitch += params.pitchPre;
 			int rowFirstPitch = pitch;
 			
 			int octaveGroupNumber = 0; // for Janko only
-		    int jankoRowNumber = 0; // for Janko only
+		    int rowCounter = 0;
 			
 			for (int j = 0; j < mRowCount; j++)
 			{	
@@ -489,44 +398,25 @@ public class HexKeyboard extends View
 					int kittyCornerX = Math.round(x - mTileWidth / 2);
 					int kittyCornerY = (int)Math.round(y - mTileRadius * 1.5);
 					
-					HexKey kittyCornerKey = null;
-					if (board.equals("Jammer")) {
-						kittyCornerKey = new JammerKey(
-								mContext,
-								mTileRadius,
-								new Point(kittyCornerX, kittyCornerY),
-								ipitch,
-								instru,
-								++keyCount);
-					} else if (board.equals("Sonome")) {
-						kittyCornerKey = new SonomeKey(
-								mContext,
-								mTileRadius,
-								new Point(kittyCornerX, kittyCornerY),
-								ipitch,
-								instru,
-								++keyCount);
-					} else if (board.equals("Janko")) {
-						kittyCornerKey = new JankoKey(
+					HexKey kittyCornerKey = strategy.createKey(
 								mContext,
 								mTileRadius,
 								new Point(kittyCornerX, kittyCornerY),
 								ipitch,
 								instru,
 								++keyCount,
-								octaveGroupNumber);
-					}
+                                octaveGroupNumber);
 					
 					if (kittyCornerKey.isKeyVisible()) {
 						mKeys.add(kittyCornerKey);
 						Log.d("HexKeyboard::setUpKeyBoard", "setUpKeyBoard Key: " + Integer.toString(keyCount-1) + " kittyCornerKey i/j " + Integer.toString(i) + "/" + Integer.toString(j));
 						// Limit sounds range: add this pitch (midiNoteNumber) to the list of notes to keep (notes that are visible on screen)
-						miRangeLimits.get(instruName).add(ipitch);
+						miRangeLimits.get(instruName).add(kittyCornerKey.mMidiNoteNumber);
 					} else {
 						--keyCount;
 					}
 					
-					pitch += pitchh1;
+					pitch += params.pitch1;
 					
 					// Setup instrument to load for the next key
 					instru = null;
@@ -553,67 +443,45 @@ public class HexKeyboard extends View
 
 					// Setup key
 					HexKey key = null;
-					int jpitch = ipitch;
-					if (board.equals("Jammer")) {
-						key = new JammerKey(
-								mContext,
-								mTileRadius,
-								new Point(x, y),
-								ipitch,
-								instru,
-								++keyCount);
-					} else if (board.equals("Sonome")) {
-						key = new SonomeKey(
-								mContext,
-								mTileRadius,
-								new Point(x, y),
-								ipitch,
-								instru,
-								++keyCount);
-					} else if (board.equals("Janko")) {
-						int ogn = octaveGroupNumber;
-						if ((jankoRowNumber+1) % groupSize == 0) // check if the next line should be the same octave or another one (because Janko keyboard is made of 3 rows chunks, not 2 like Jammer or Sonome)
-					    {
-					    	ogn++;
-					    	jpitch -= 12;
-					    }
-						key = new JankoKey(
+                    int jpitch = ipitch;
+                    int ogn = octaveGroupNumber;
+
+                    if (params.groupSize > 0 && (rowCounter + 1) % params.groupSize == 0) {
+                        ogn++;
+                        jpitch += params.groupJumpPitch;
+                    }
+
+					key = strategy.createKey(
 								mContext,
 								mTileRadius,
 								new Point(x, y),
 								jpitch,
 								instru,
 								++keyCount,
-								ogn);
-					}
+                                ogn);
 
 					if (key.isKeyVisible()) {
 						mKeys.add(key);
 						Log.d("HexKeyboard::setUpKeyBoard", "setUpKeyBoard Key: " + Integer.toString(keyCount-1) + " key i/j " + Integer.toString(i) + "/" + Integer.toString(j));
 						// Limit sounds range: add this pitch (midiNoteNumber) to the list of notes to keep (notes that are visible on screen)
-						if (board.equals("Janko")) {
-							miRangeLimits.get(instruName).add(jpitch);
-						} else {
-							miRangeLimits.get(instruName).add(ipitch);
-						}
+						miRangeLimits.get(instruName).add(key.mMidiNoteNumber);
 					} else {
 						--keyCount;
 					}
 					
-					pitch += pitchh2;
+					pitch += params.pitch2;
 
 					x += mTileWidth;
 				}
 
-				pitch = rowFirstPitch + pitchhpost;
+				pitch = rowFirstPitch + params.pitchPost;
 				rowFirstPitch = pitch;
 				y += 3 * mTileRadius;
 				
-				// for Janko only
-				jankoRowNumber += 2;
-				if (board.equals("Janko") && jankoRowNumber % groupSize == 0)
+				rowCounter += 2;
+				if (params.groupSize > 0 && rowCounter % params.groupSize == 0)
 				{
-				    pitch -= 12;
+				    pitch += params.groupJumpPitch;
 				    rowFirstPitch = pitch;
 			    	octaveGroupNumber++;
 				}
@@ -861,18 +729,7 @@ public class HexKeyboard extends View
 
 		// Setup the layout (map the keys onscreen and create the array of functional HexKeys)
 		String layoutPref = mPrefs.getString("layout", null);
-		if (layoutPref.equals("Sonome"))
-		{
-			this.setUpKeyBoard("Sonome");
-		}
-		else if (layoutPref.equals("Jammer"))
-		{
-			this.setUpKeyBoard("Jammer");
-		}
-		else if (layoutPref.equals("Janko"))
-		{
-			this.setUpKeyBoard("Janko");
-		}
+		this.setUpKeyBoard(layoutPref);
 		
 		if (!mHideModifierKeys) {
 			this.setUpModifierKeys();

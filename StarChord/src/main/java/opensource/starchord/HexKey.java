@@ -253,6 +253,11 @@ public abstract class HexKey
 			mKeyOverlap = false;
 			return mPrefs.getString("jankoKeyOrientation", null);
 		}
+		else if (layoutPref.equals("Custom")) // Custom
+		{
+			mKeyOverlap = false;
+			return mPrefs.getString("customKeyOrientation", null);
+		}
 		else // Jammer
 		{
 			return mPrefs.getString("jammerKeyOrientation", null);
