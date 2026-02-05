@@ -410,6 +410,7 @@ public class Play extends Activity implements OnSharedPreferenceChangeListener
 	@Override
 	protected void onResume() {
 		super.onResume();
+
 		// Check if settings have changed when returning from preferences
 		if (configChanged) {
 			Log.d("Play", "Config changed detected in onResume, reloading keyboard");
@@ -448,7 +449,7 @@ public class Play extends Activity implements OnSharedPreferenceChangeListener
 	
 	// Clean all playing states (eg: sounds playing, etc)
 	public void cleanStates() {
-		HexKeyboard.stopAll();
+		HexKeyboard.stopAllNotes();
 	}
 	
 	@Override
