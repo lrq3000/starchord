@@ -1,14 +1,14 @@
 Hexiano
 ======
 
-![Hexiano logo](https://raw.github.com/lrq3000/hexiano/master/wiki/images/hexiano-logo.png)
+![Logo](https://raw.github.com/lrq3000/hexiano/master/wiki/images/logo.png)
 &nbsp;
-![Example of Hexiano running](https://raw.github.com/lrq3000/hexiano/master/wiki/images/hexiano-keyboard.jpg)
+![Example of StarChord running](https://raw.github.com/lrq3000/hexiano/master/wiki/images/hexiano-keyboard.jpg)
 
 
 Description
 ----------------
-Hexiano is an Open-source isomorphic musical keyboard, and technically a sample-based synthesizer.
+StarChord is an Open-source isomorphic musical keyboard, and technically a sample-based synthesizer. This is a fork and successor of Hexiano, itself a fork of IsoKeys.
 
 Isomorphic means that all intervals, chords, and scales have identical patterns, regardless of the key in which one plays. In other words, in [isomorphic keyboard](https://en.wikipedia.org/wiki/Isomorphic_keyboard), also called [generalized keyboards](https://en.wikipedia.org/wiki/Generalized_keyboard), all musical concepts have an invariant pattern. This allows to understand theoretical musical concepts not only from the sound, but also visually.
 
@@ -18,7 +18,7 @@ Finally, isomorphic keyboards are also ideal for microtonality, although this is
 
 Isomorphic keyboards are an old concept, and some layouts are more than a century old (Janko, Wicki-Hayden). The original concept of isomorphic hexagonal keyboards with invariant musical patterns likely traces back to the [Tonnetz](https://en.wikipedia.org/wiki/Tonnetz).
 
-Hexiano not only aims to deliver the isomorphic keyboard concept to the Android platform, but it is also committed to give you ergonomic tools to get the most out of these amazing keyboards, with all the options you need to customize your own Hexiano experience.
+StarChord not only aims to deliver the isomorphic keyboard concept to the Android platform, but it is also committed to give you ergonomic tools to get the most out of these amazing keyboards, with all the options you need to customize your own Hexiano experience.
 
 See http://www.altkeyboards.com/ for more information about these instruments.
 
@@ -97,7 +97,7 @@ Feedback
 
 If you have found any bug or have a suggestion for an amazing new feature you would like to see in Hexiano, feel free to post a request in the github issue tracker:
 
-https://github.com/lrq3000/hexiano/issues
+https://github.com/lrq3000/starchord/issues
 
 Similar projects
 ----------------
@@ -108,15 +108,16 @@ License
 -----------
 Licensed under the terms of the General Public License v3 (GPLv3).
 
-Copyleft @ 2013-2024 by Stephen Larroque,
+Logo designed by [@trapicki](https://github.com/trapicki) and [@hyperagon](https://github.com/hyperagon), with suggestions by [@lrq3000](https://github.com/lrq3000), [@medavox](https://github.com/medavox), [@0x5c](https://github.com/0x5c) and [@Forevian](https://github.com/Forevian).
+
+Copyleft @ 2013-2026 by Stephen Karl Larroque,
 Copyright © 2012 by James Haigh,
 Copyright © 2011, 2012 by David Randolph.
-Hexiano™ and the Hexiano logo are trademarks of James Haigh.
 
 Latest project at:
-https://github.com/lrq3000/hexiano
+https://github.com/lrq3000/starchord
 
-Original project by James Haigh at:
+Previous project by James Haigh at:
 https://gitorious.org/hexiano
 
 From the sourcecode of the opensourced version (under GPLv3) of Isokeys by David Randolph:
