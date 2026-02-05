@@ -10,7 +10,7 @@ StarChord
 
 Description
 ----------------
-StarChord is an Open-source isomorphic musical keyboard, and technically a sample-based synthesizer. This is a fork and successor of Hexiano, itself a fork of IsoKeys.
+StarChord is an opensource isomorphic musical keyboard, and technically a sample-based synthesizer. This is a fork and successor of Hexiano, itself a fork of IsoKeys.
 
 Isomorphic means that all intervals, chords, and scales have identical patterns, regardless of the key in which one plays. In other words, in [isomorphic keyboard](https://en.wikipedia.org/wiki/Isomorphic_keyboard), also called [generalized keyboards](https://en.wikipedia.org/wiki/Generalized_keyboard), all musical concepts have an invariant pattern. This allows to understand theoretical musical concepts not only from the sound, but also visually.
 
