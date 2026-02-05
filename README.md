@@ -1,9 +1,9 @@
 Hexiano
 ======
 
-![Logo](https://raw.github.com/lrq3000/hexiano/master/wiki/images/logo.png)
+![Logo](https://raw.github.com/lrq3000/starchord/master/wiki/images/logo-1024.png)
 &nbsp;
-![Example of StarChord running](https://raw.github.com/lrq3000/hexiano/master/wiki/images/hexiano-keyboard.jpg)
+![Example of StarChord running](https://raw.github.com/lrq3000/starchord/master/wiki/images/hexiano-keyboard.jpg)
 
 
 Description
