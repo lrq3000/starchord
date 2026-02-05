@@ -140,12 +140,12 @@ This soundfont was built using the Zenph Studios Yamaha Disklavier Pro Piano Mul
 which was created by Dr. Mikhail Krishtal, Director of Music Research and Production, and
 his team at Zenph Studios.
 
-Neither Dr. Krishtal nor Mr. Saez in any way endorses StarChord. Their work is used under the terms of the Creative 
+Neither Dr. Krishtal nor Mr. Saez in any way endorse StarChord. Their work is used under the terms of the Creative 
 Commons Attribution 3.0 license. See http://creativecommons.org/licenses/by/3.0 for details.
 </string>
 	 <string name="credit_osc">\n----\nJava OSC Library provided by Illposed Software: http://www.illposed.com/software/javaosc.html
 \nGreat thanks to Ahmet Kizilay for freeing the source of his app QuickOsc, which provided inspiration for the OSC/MIDI feature: https://github.com/artsince/QuickOSC
-\n\nNone of the guys mentioned above endorses StarChord in any way.
+\n\nNone of the persons mentioned above endorse StarChord in any way.
 </string>
 
 
