@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "opensource.starchord.Play"
-        minSdk = 8
+        minSdk = 21
         targetSdk = 34
         versionCode = 10103    // MUST be an Integer (e.g., 1, 2, 100, 10101 - use 10101 to mimic semantic versioning by using 0 as a dot)
         versionName = "1.1.3"  // CAN be a String (e.g., "1.1.1", "2.0-beta" - can follow semantic versioning)
@@ -42,7 +42,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    
+
     lint {
         // Disable lint errors for this legacy project
         abortOnError = false
