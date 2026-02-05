@@ -9,10 +9,10 @@ android {
 
     defaultConfig {
         applicationId = "opensource.starchord.Play"
-        minSdk = 21
+        minSdk = 21  // SDK 21 is the min version that supports transparent rescaling of a Vector Drawable (imported from a SVG in Vector Studio inside Android Studio)
         targetSdk = 34
-        versionCode = 10103    // MUST be an Integer (e.g., 1, 2, 100, 10101 - use 10101 to mimic semantic versioning by using 0 as a dot)
-        versionName = "1.1.3"  // CAN be a String (e.g., "1.1.1", "2.0-beta" - can follow semantic versioning)
+        versionCode = 10200    // MUST be an Integer (e.g., 1, 2, 100, 10101 - use 10101 to mimic semantic versioning by using 0 as a dot)
+        versionName = "1.2.0"  // CAN be a String (e.g., "1.1.1", "2.0-beta" - can follow semantic versioning)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
