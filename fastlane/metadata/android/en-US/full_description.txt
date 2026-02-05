@@ -1,0 +1,42 @@
+StarChord brings isomorphic keyboard technology to your Android device as an open-source musical instrument application.
+
+WHAT MAKES IT SPECIAL
+
+In traditional piano keyboards, playing the same chord in different keys requires learning completely different finger patterns. StarChord solves this by using isomorphic layouts where musical patterns remain constant regardless of the key you're playing in. This means intervals, chords, and scales always look the same visually.
+
+The two-dimensional layout provides higher key density compared to linear piano keyboards, allowing faster access to different octaves - a significant advantage for performance.
+
+KEYBOARD LAYOUTS
+
+StarChord supports multiple proven isomorphic layouts:
+• Jammer (Wicki-Hayden)
+• Sonome (Harmonic Table)
+• Janko
+
+These layouts, some over a century old, trace their conceptual origins to the Tonnetz - a mathematical representation of musical relationships.
+
+CUSTOMIZATION
+
+The app provides extensive customization options:
+• Multiple color schemes
+• Adjustable key sizes and touch surfaces
+• Velocity sensitivity (pressure-responsive playing)
+• Custom soundfonts from SD card
+• Multi-instrument mapping on different keyboard regions
+• Sustain and other modifier keys
+
+TECHNICAL DETAILS
+
+StarChord functions as a sample-based synthesizer. It includes a built-in piano instrument and supports loading additional instruments by placing properly formatted sound samples in the starchord/ folder on your device storage.
+
+Sound files should follow the naming pattern: filename_m[MidiNote]v[Velocity].ext
+Example: piano_m60.wav (Middle C)
+
+PROJECT HISTORY
+
+StarChord continues the development of Hexiano (by James Haigh), which itself was derived from IsoKeys (by David Randolph). This version includes numerous bug fixes and new features, particularly the multi-instrument capability.
+
+For more information about isomorphic keyboards, visit http://www.altkeyboards.com/
+
+Source code: https://github.com/lrq3000/starchord
+License: GNU General Public License v3 (GPLv3)
