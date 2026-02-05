@@ -1,7 +1,6 @@
 StarChord
 ======
-
-![Logo](https://raw.github.com/lrq3000/starchord/master/wiki/images/logo-1024.png)
+<img src="[image.png](https://raw.github.com/lrq3000/starchord/master/wiki/images/logo-1024.png)" width="30%">
 &nbsp;
 ![Example of StarChord running](https://raw.github.com/lrq3000/starchord/master/wiki/images/hexiano-keyboard.jpg)
 
