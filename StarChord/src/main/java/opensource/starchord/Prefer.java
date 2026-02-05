@@ -879,7 +879,7 @@ public class Prefer extends PreferenceActivity
 
 	    int i = 0;
 	    for (String entry : list) {
-	        if (entry == value) {
+	        if (entry != null && entry.equals(value)) {
 	            return i;
 	        } 
 	        i++;
