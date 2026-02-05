@@ -1,11 +1,11 @@
 StarChord
 ======
 
-<img src="https://raw.github.com/lrq3000/starchord/master/wiki/images/logo-1024.png" style="width:384px;" />
+<img src="https://raw.github.com/lrq3000/starchord/master/wiki/images/logo.png" style="width:384px;" />
 
 &nbsp;
 
-![Example of StarChord running](https://raw.github.com/lrq3000/starchord/master/wiki/images/starchord-keyboard.jpg)
+![Example of StarChord running](https://raw.github.com/lrq3000/starchord/master/wiki/images/screenshot.jpg)
 
 
 Description
