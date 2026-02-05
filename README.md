@@ -1,4 +1,4 @@
-Hexiano
+StarChord
 ======
 
 ![Logo](https://raw.github.com/lrq3000/starchord/master/wiki/images/logo-1024.png)
