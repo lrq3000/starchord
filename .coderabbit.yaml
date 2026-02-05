@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: en-US
+tone_instructions: ''
+enable_free_tier: false  # free tier != open-source tier, even if free, the open-source tier offers "free reviews forever for public repositories. No additional setup is required"
+early_access: true
+reviews:
+  profile: assertive
+  review_details: true
+  fail_commit_status: true
+  auto_apply_labels: true
+  poem: false
+  abort_on_close: false
+  auto_review:
+    enabled: true
+    auto_incremental_review: false  # if false, triggers once per review, then user needs to force new reviews if wanted, this is crucial to avoid hitting rates limits on a single PR when iterating fast wath small commits as is best practice
+    drafts: true
+issue_enrichment:
+  auto_enrich:
+    enabled: true
+  labeling:
+    auto_apply_labels: true
