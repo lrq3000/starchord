@@ -1,6 +1,7 @@
 StarChord
 ======
-<img src="[image.png](https://raw.github.com/lrq3000/starchord/master/wiki/images/logo-1024.png)" width="384px">
+
+<img src="[image.png](https://raw.github.com/lrq3000/starchord/master/wiki/images/logo-1024.png)" style="width:384px;">
 
 &nbsp;
 
