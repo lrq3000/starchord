@@ -73,6 +73,8 @@ public class Play extends Activity implements OnSharedPreferenceChangeListener
 	static int POLYPHONY_COUNT = 16;
 	public static SoundPool mSoundPool;
 	boolean configChanged = false;
+	static boolean savedSustainState = false;
+	static boolean hasSavedSustainState = false;
 
 	private String getVersionName()
 	{
@@ -410,6 +412,22 @@ public class Play extends Activity implements OnSharedPreferenceChangeListener
 	@Override
 	protected void onResume() {
 		super.onResume();
+
+		// Restore sustain state if saved (e.g. returning from preferences)
+		if (hasSavedSustainState) {
+			HexKeyboard.mSustain = savedSustainState;
+			hasSavedSustainState = false;
+
+			// Restore visual state of SustainKey if it was pressed and we are not reloading the keyboard
+			if (!configChanged && HexKeyboard.mSustain && !HexKeyboard.mKeys.isEmpty()) {
+				// SustainKey is always at index 0 if not hidden
+				if (!HexKeyboard.mHideModifierKeys && HexKeyboard.mKeys.get(0) instanceof SustainKey) {
+					HexKeyboard.mKeys.get(0).setPressed(true);
+					mBoard.invalidate(); // Ensure redraw
+				}
+			}
+		}
+
 		// Check if settings have changed when returning from preferences
 		if (configChanged) {
 			Log.d("Play", "Config changed detected in onResume, reloading keyboard");
@@ -453,6 +471,10 @@ public class Play extends Activity implements OnSharedPreferenceChangeListener
 	
 	@Override
 	protected void onPause() {
+		// Save the current sustain state before cleaning states (which would reset it)
+		savedSustainState = HexKeyboard.mSustain;
+		hasSavedSustainState = true;
+
 		// If app is closed/minimized (home button is pressed)
 		//if (this.isFinishing()){ // The function isFinishing() returns a boolean. True if your App is actually closing, False if your app is still running but for example the screen turns off.
 			// Clean all playing states
