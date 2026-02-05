@@ -1,4 +1,4 @@
-package opensource.hexiano;
+package opensource.starchord;
 
 public class Point {
 

@@ -1,27 +1,27 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                         *
- *   Hexiano, an isomorphic musical keyboard for Android                   *
+ *   StarChord, an isomorphic musical keyboard for Android                   *
  *   Copyleft  @ 2013 Stephen Larroque                                     *
  *   Copyright © 2012 James Haigh                                          *
  *   Copyright © 2011 David A. Randolph                                    *
  *                                                                         *
  *   FILE: Piano.java                                                      *
  *                                                                         *
- *   This file is part of Hexiano, an open-source project hosted at:       *
- *   https://github.com/lrq3000/hexiano                                         *
+ *   This file is part of StarChord, an open-source project hosted at:       *
+ *   https://github.com/lrq3000/starchord                                         *
  *                                                                         *
- *   Hexiano is free software: you can redistribute it and/or              *
+ *   StarChord is free software: you can redistribute it and/or              *
  *   modify it under the terms of the GNU General Public License           *
  *   as published by the Free Software Foundation, either version          *
  *   3 of the License, or (at your option) any later version.              *
  *                                                                         *
- *   Hexiano is distributed in the hope that it will be useful,            *
+ *   StarChord is distributed in the hope that it will be useful,            *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
  *   GNU General Public License for more details.                          *
  *                                                                         *
  *   You should have received a copy of the GNU General Public License     *
- *   along with Hexiano.  If not, see <http://www.gnu.org/licenses/>.      *
+ *   along with StarChord.  If not, see <http://www.gnu.org/licenses/>.      *
  *                                                                         *
  *   NOTE: The sounds used for this instrument were derived from           *
  *   the acoustic-piano soundfont created by Roberto Gordo Saez.
@@ -77,7 +77,7 @@ http://creativecommons.org/licenses/by/3.0/
 
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package opensource.hexiano;
+package opensource.starchord;
 
 import java.lang.reflect.Field;
 import java.util.regex.Matcher;

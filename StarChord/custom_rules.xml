@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- NOTE: Must be run from basedir="../Hexiano/build/" in build.xml. -->
+<!-- NOTE: Must be run from basedir="../StarChord/build/" in build.xml. -->
 <project name="custom_rules" default="debug">
 	<target name="filter-package">
 		<!-- FIXME: AndroidManifest.xml is referenced /before/ -pre-build! -->
@@ -38,7 +38,7 @@
 			</filterset>
 		</copy>
 		<copy todir="../build/src/${app.packagename.path}" overwrite="true" encoding="utf-8">
-			<fileset dir="../src/hexiano/">
+			<fileset dir="../src/starchord/">
 				<include name="**.java" />
 			</fileset>
 			<filterset>

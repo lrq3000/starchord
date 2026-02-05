@@ -1,30 +1,30 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                         *
- *   Hexiano, an isomorphic musical keyboard for Android                   *
+ *   StarChord, an isomorphic musical keyboard for Android                   *
  *   Copyleft  @ 2013 Stephen Larroque                                     *
  *   Copyright © 2012 James Haigh                                          *
  *   Copyright © 2011, 2012 David A. Randolph                              *
  *                                                                         *
  *   FILE: Prefer.java                                                     *
  *                                                                         *
- *   This file is part of Hexiano, an open-source project hosted at:       *
- *   https://github.com/lrq3000/hexiano                                         *
+ *   This file is part of StarChord, an open-source project hosted at:       *
+ *   https://github.com/lrq3000/starchord                                         *
  *                                                                         *
- *   Hexiano is free software: you can redistribute it and/or              *
+ *   StarChord is free software: you can redistribute it and/or              *
  *   modify it under the terms of the GNU General Public License           *
  *   as published by the Free Software Foundation, either version          *
  *   3 of the License, or (at your option) any later version.              *
  *                                                                         *
- *   Hexiano is distributed in the hope that it will be useful,            *
+ *   StarChord is distributed in the hope that it will be useful,            *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
  *   GNU General Public License for more details.                          *
  *                                                                         *
  *   You should have received a copy of the GNU General Public License     *
- *   along with Hexiano.  If not, see <http://www.gnu.org/licenses/>.      *
+ *   along with StarChord.  If not, see <http://www.gnu.org/licenses/>.      *
  *                                                                         *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-package opensource.hexiano;
+package opensource.starchord;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,7 +41,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 
-import opensource.hexiano.R;
+import opensource.starchord.R;
 
 public class Prefer extends PreferenceActivity
 {
@@ -457,7 +457,7 @@ public class Prefer extends PreferenceActivity
 				public boolean onPreferenceClick(Preference donate)
 				{
 					Log.d("Prefer", "onPreferenceClick, donate");
-					Uri webpage = Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=2UZVTYPPP9AUG&lc=GB&item_name=Hexiano%2Eorg&currency_code=GBP");
+					Uri webpage = Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=2UZVTYPPP9AUG&lc=GB&item_name=StarChord%2Eorg&currency_code=GBP");
 					Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
 					startActivity(webIntent);
 					return false;

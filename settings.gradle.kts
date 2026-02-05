@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Hexiano"
-include(":Hexiano")
+rootProject.name = "StarChord"
+include(":StarChord")
  

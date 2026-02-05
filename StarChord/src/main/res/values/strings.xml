@@ -6,9 +6,9 @@
 	  PACKAGE INFOS
 	*****************
 	-->
-	<string name="url">https://github.com/lrq3000/hexiano</string>
+	<string name="url">https://github.com/lrq3000/starchord</string>
 	<string name="contact">lrq3000@gmail.com</string>
-	<string name="app_name">Hexiano</string>
+	<string name="app_name">StarChord</string>
 
 
 	<!--
@@ -115,14 +115,14 @@
 	  CONTEXTUAL MENU
 	*******************
 	-->
-	<string name="prompt_about">About Hexiano</string>
+	<string name="prompt_about">About StarChord</string>
 	<string name="prompt_license">License</string>
 	<string name="prompt_quit">Exit</string>
 
 	<!-- Contextual menu: About -->
-	<string name="copyright">Hexiano, copyright © 2011, 2012 by David A. Randolph, 2012 by James Haigh, copyleft 2013 Skriptico, copyleft 2013 Stephen Larroque.</string>
-	<string name="description">Hexiano is an Open-source isomorphic musical keyboard. All intervals, chords, and scales have identical patterns, regardless of the key in which one plays. Hexiano aims to deliver the isomorphic keyboard concept to Android users. See http://www.altkeyboards.com/ for more information about these instruments.</string>
-	<string name="open_source">Source code for Hexiano is available at https://github.com/lrq3000/hexiano (James original Hexiano is at https://gitorious.org/hexiano) under the terms of GNU General Public License (version 3).</string>
+	<string name="copyright">StarChord, copyright © 2011, 2012 by David A. Randolph, 2012 by James Haigh, copyleft 2013 Skriptico, copyleft 2013 Stephen Larroque.</string>
+	<string name="description">StarChord is an Open-source isomorphic musical keyboard. All intervals, chords, and scales have identical patterns, regardless of the key in which one plays. StarChord aims to deliver the isomorphic keyboard concept to Android users. See http://www.altkeyboards.com/ for more information about these instruments.</string>
+	<string name="open_source">Source code for StarChord is available at https://github.com/lrq3000/starchord (James original StarChord is at https://gitorious.org/starchord) under the terms of GNU General Public License (version 3).</string>
 	<string name="license">This program is free software; you can redistribute it and/or modify it under the
 	terms of the GNU General Public License as published by the Free Software Foundation;
 	either version 3 of the License, or (at your option) any later version.
@@ -131,21 +131,21 @@
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	For the complete license, see http://www.gnu.org/licenses/.</string>
 	<string name="credit_piano">Sounds from the acoustic grand piano soundfont (Yamaha Disklavier Pro), release 2008-09-10,
-by Roberto Gordo Saez (roberto.gordo@gmail.com), were adapted for use in Hexiano. (See http://zenvoid.org/audio.html.)
+by Roberto Gordo Saez (roberto.gordo@gmail.com), were adapted for use in StarChord. (See http://zenvoid.org/audio.html.)
 Specifically, we translated a set of files (mostly from the third velocity layer) from the soundfont into Ogg Vorbis format, with
-a rather drastic loss of fidelity. Please do not take the Hexiano piano sound as representative
+a rather drastic loss of fidelity. Please do not take the StarChord piano sound as representative
 of the quality of this excellent soundfont. It just helped to start from a high-quality source.
 
 This soundfont was built using the Zenph Studios Yamaha Disklavier Pro Piano Multisamples for OLPC,
 which was created by Dr. Mikhail Krishtal, Director of Music Research and Production, and
 his team at Zenph Studios.
 
-Neither Dr. Krishtal nor Mr. Saez in any way endorses Hexiano. Their work is used under the terms of the Creative 
+Neither Dr. Krishtal nor Mr. Saez in any way endorses StarChord. Their work is used under the terms of the Creative 
 Commons Attribution 3.0 license. See http://creativecommons.org/licenses/by/3.0 for details.
 </string>
 	 <string name="credit_osc">\n----\nJava OSC Library provided by Illposed Software: http://www.illposed.com/software/javaosc.html
 \nGreat thanks to Ahmet Kizilay for freeing the source of his app QuickOsc, which provided inspiration for the OSC/MIDI feature: https://github.com/artsince/QuickOSC
-\n\nNone of the guys mentioned above endorses Hexiano in any way.
+\n\nNone of the guys mentioned above endorses StarChord in any way.
 </string>
 
 
@@ -155,7 +155,7 @@ Commons Attribution 3.0 license. See http://creativecommons.org/licenses/by/3.0 
 	***************
 	-->
 	<string name="prompt_preferences">Preferences</string>
-	<string name="prompt_inneract">Support Hexiano</string>
+	<string name="prompt_inneract">Support StarChord</string>
 
 	<!-- Layout  (fine-tuning settings per keyboard type) -->
 	<string name="heading_appearance">Appearance</string>

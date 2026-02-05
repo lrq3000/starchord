@@ -1,25 +1,25 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                         *
- *   Hexiano, an isomorphic musical keyboard for Android                   *
+ *   StarChord, an isomorphic musical keyboard for Android                   *
  *   Copyleft  @ 2013 Stephen Larroque                                     *
  *                                                                         *
  *   FILE: GenericInstrument.java                                          *
  *                                                                         *
- *   This file is part of Hexiano, an open-source project hosted at:       *
- *   https://github.com/lrq3000/hexiano                                         *
+ *   This file is part of StarChord, an open-source project hosted at:       *
+ *   https://github.com/lrq3000/starchord                                         *
  *                                                                         *
- *   Hexiano is free software: you can redistribute it and/or              *
+ *   StarChord is free software: you can redistribute it and/or              *
  *   modify it under the terms of the GNU General Public License           *
  *   as published by the Free Software Foundation, either version          *
  *   3 of the License, or (at your option) any later version.              *
  *                                                                         *
- *   Hexiano is distributed in the hope that it will be useful,            *
+ *   StarChord is distributed in the hope that it will be useful,            *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
  *   GNU General Public License for more details.                          *
  *                                                                         *
  *   You should have received a copy of the GNU General Public License     *
- *   along with Hexiano.  If not, see <http://www.gnu.org/licenses/>.      *
+ *   along with StarChord.  If not, see <http://www.gnu.org/licenses/>.      *
  *                                                                         *
  *   NOTE: The sounds used for this instrument were derived from           *
  *   the acoustic-piano soundfont created by Roberto Gordo Saez.
@@ -75,7 +75,7 @@ http://creativecommons.org/licenses/by/3.0/
 
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-package opensource.hexiano;
+package opensource.starchord;
 
 import java.io.File;
 import java.util.regex.Matcher;
@@ -155,7 +155,7 @@ public class GenericInstrument extends Instrument
 
 	// List all external (eg: sd card) instruments (just the name of the subfolders)
 	public static ArrayList<String> listExternalInstruments() {
-		return GenericInstrument.listExternalInstruments("/hexiano/");
+		return GenericInstrument.listExternalInstruments("/starchord/");
 	}
 
 	// List all external instruments (just the name of the subfolders)
@@ -185,7 +185,7 @@ public class GenericInstrument extends Instrument
 		File[] Files = null;
 		if (path.length() != 0) {
 			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-				path = Environment.getExternalStorageDirectory().toString()+"/hexiano/"+path;
+				path = Environment.getExternalStorageDirectory().toString()+"/starchord/"+path;
 				Log.d("GenericInstrument::listExternalFiles", "GenericInstrument: list external files from path: "+path);
 
 			    File f = new File(path);

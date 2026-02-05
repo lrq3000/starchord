@@ -1,4 +1,4 @@
-package opensource.hexiano;
+package opensource.starchord;
 
 import android.app.Dialog;
 import android.content.Context;

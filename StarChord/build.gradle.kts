@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "opensource.hexiano"
+    namespace = "opensource.starchord"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "opensource.hexiano.Play"
+        applicationId = "opensource.starchord.Play"
         minSdk = 8
         targetSdk = 34
         versionCode = 10103    // MUST be an Integer (e.g., 1, 2, 100, 10101 - use 10101 to mimic semantic versioning by using 0 as a dot)

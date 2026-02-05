@@ -5,12 +5,12 @@ StarChord
 
 &nbsp;
 
-![Example of StarChord running](https://raw.github.com/lrq3000/starchord/master/wiki/images/hexiano-keyboard.jpg)
+![Example of StarChord running](https://raw.github.com/lrq3000/starchord/master/wiki/images/starchord-keyboard.jpg)
 
 
 Description
 ----------------
-StarChord is an opensource isomorphic musical keyboard, and technically a sample-based synthesizer. This is a fork and successor of Hexiano, itself a fork of IsoKeys.
+StarChord is an opensource isomorphic musical keyboard, and technically a sample-based synthesizer.
 
 Isomorphic means that all intervals, chords, and scales have identical patterns, regardless of the key in which one plays. In other words, in [isomorphic keyboard](https://en.wikipedia.org/wiki/Isomorphic_keyboard), also called [generalized keyboards](https://en.wikipedia.org/wiki/Generalized_keyboard), all musical concepts have an invariant pattern. This allows to understand theoretical musical concepts not only from the sound, but also visually.
 
@@ -20,11 +20,11 @@ Finally, isomorphic keyboards are also ideal for microtonality, although this is
 
 Isomorphic keyboards are an old concept, and some layouts are more than a century old (Janko, Wicki-Hayden). The original concept of isomorphic hexagonal keyboards with invariant musical patterns likely traces back to the [Tonnetz](https://en.wikipedia.org/wiki/Tonnetz).
 
-StarChord not only aims to deliver the isomorphic keyboard concept to the Android platform, but it is also committed to give you ergonomic tools to get the most out of these amazing keyboards, with all the options you need to customize your own Hexiano experience.
+StarChord not only aims to deliver the isomorphic keyboard concept to the Android platform, but it is also committed to give you ergonomic tools to get the most out of these amazing keyboards, with all the options you need to customize your own StarChord experience.
 
 See http://www.altkeyboards.com/ for more information about these instruments.
 
-This is a fork of the Hexiano app, with several bugfixes and new features, such as the possibility to use multiple instruments on the same keyboard, and add new instruments soundfonts from the SD card.
+This is a fork and successor to Hexiano, itself a fork of IsoKeys. StarChord includes several bugfixes and new features, such as the possibility to use multiple instruments on the same keyboard, and add new instruments soundfonts from the SD card.
 
 Build and install
 -----------------------
@@ -43,7 +43,7 @@ Based on the source code, here is how you can add new instruments and the expect
 ### How to Add New Instruments
 To add a new instrument, you need to create a specific folder structure on your device's external storage (SD card):
 
-1.  **Create a Folder:** Create a folder inside `hexiano/` on your external storage (e.g., `/sdcard/hexiano/MyNewInstrument/`). The name of this folder will be the name of the instrument in the app.
+1.  **Create a Folder:** Create a folder inside `starchord/` on your external storage (e.g., `/sdcard/starchord/MyNewInstrument/`). The name of this folder will be the name of the instrument in the app.
 2.  **Add Audio Files:** Place your audio samples inside this folder.
 
 ### Expected File Type & Naming Convention
@@ -97,7 +97,7 @@ To quick-start your contributions, here is a short description of how the projec
 Feedback
 --------------
 
-If you have found any bug or have a suggestion for an amazing new feature you would like to see in Hexiano, feel free to post a request in the github issue tracker:
+If you have found any bug or have a suggestion for an amazing new feature you would like to see in StarChord, feel free to post a request in the github issue tracker:
 
 https://github.com/lrq3000/starchord/issues
 
