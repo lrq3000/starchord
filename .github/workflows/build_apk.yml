@@ -33,5 +33,5 @@ jobs:
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: Hexiano-debug
-        path: Hexiano/build/outputs/apk/debug/Hexiano-debug.apk
+        name: StarChord-debug
+        path: StarChord/build/outputs/apk/debug/StarChord-debug.apk
