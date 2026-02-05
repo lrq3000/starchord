@@ -6,7 +6,7 @@
 	  PACKAGE INFOS
 	*****************
 	-->
-	<string name="url">https://github.com/lrq3000/starchord</string>
+	<string name="url">https://www.github.com/lrq3000/starchord</string>
 	<string name="contact">lrq3000@gmail.com</string>
 	<string name="app_name">StarChord</string>
 
@@ -120,9 +120,9 @@
 	<string name="prompt_quit">Exit</string>
 
 	<!-- Contextual menu: About -->
-	<string name="copyright">StarChord, copyright © 2011, 2012 by David A. Randolph, 2012 by James Haigh, copyleft 2013 Skriptico, copyleft 2013 Stephen Larroque.</string>
-	<string name="description">StarChord is an Open-source isomorphic musical keyboard. All intervals, chords, and scales have identical patterns, regardless of the key in which one plays. StarChord aims to deliver the isomorphic keyboard concept to Android users. See http://www.altkeyboards.com/ for more information about these instruments.</string>
-	<string name="open_source">Source code for StarChord is available at https://github.com/lrq3000/starchord (James original StarChord is at https://gitorious.org/starchord) under the terms of GNU General Public License (version 3).</string>
+	<string name="copyright">StarChord, copyleft 2013-2026 Stephen Karl Larroque, copyleft 2013 Skriptico, 2012 by James Haigh, copyright © 2011-2012 by David A. Randolph.</string>
+	<string name="description">StarChord is an open-source isomorphic musical keyboard. All intervals, chords, and scales have identical patterns, regardless of the key in which one plays. StarChord aims to deliver the isomorphic keyboard concept to Android users. See http://www.altkeyboards.com/ for more information about these instruments.</string>
+	<string name="open_source">Source code for StarChord is available at https://github.com/lrq3000/starchord under the terms of GNU General Public License (version 3).</string>
 	<string name="license">This program is free software; you can redistribute it and/or modify it under the
 	terms of the GNU General Public License as published by the Free Software Foundation;
 	either version 3 of the License, or (at your option) any later version.

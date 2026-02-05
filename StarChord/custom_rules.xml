@@ -38,7 +38,7 @@
 			</filterset>
 		</copy>
 		<copy todir="../build/src/${app.packagename.path}" overwrite="true" encoding="utf-8">
-			<fileset dir="../src/starchord/">
+			<fileset dir="../src/main/java/opensource/starchord/">
 				<include name="**.java" />
 			</fileset>
 			<filterset>
