@@ -1,14 +1,14 @@
-Hexiano Roadmap
+StarChord Roadmap
 ==============
 
 
 GOALS
 -----------
 
-The current main goal of Hexiano is to extend it as to be a fully nomad on-the-run performance keyboard for diverse instruments, 
+The current main goal of StarChord is to extend it as to be a fully nomad on-the-run performance keyboard for diverse instruments, 
 which would particularly fit street performers.
 
-Longer term goals would have Hexiano be a full midi keyboard and synthesizer, 
+Longer term goals would have StarChord be a full midi keyboard and synthesizer, 
 which just begins to be possible with the very recent (as of 2013) efforts of Google with low-latency Android Audio.
 
 Anyway if you have any other idea of a feature or any code you would like to propose to the project, 
@@ -21,7 +21,7 @@ TODO
 Here is a list of a few features that are planned in near-term:
 
 - piano HD (3 sounds every 4 are interpolated by the program currently! and in mono)
-- a new free orchestral soundbank (maybe as an external module to keep the Hexiano low in size)
+- a new free orchestral soundbank (maybe as an external module to keep the StarChord low in size)
 - Connection to computer (via USB or OSC or Bluetooth) with velocity sensitivity support ( see low latency real-time sensors streaming over udp https://github.com/umer0586/SensaGram )
 - background sound (in menu, add three buttons: load, play and loop, the last two changing to stop and pause when playing)
 - external audio effects via gyrometer/accelerometer and send by USB/OSC/Bluetooth (mapping variable CC messages like Expression, and maybe could map independently 2 different CC functions for the two dimensions x and y).
@@ -50,4 +50,4 @@ DONE
 
 NOT TO DO
 ---------
-- Hexiano used as a host for an external Midi keyboard. I see no objection if someone contributes such a code, but it's not part of the roadmap, there are plenty of other softwares that can do that, and the main purpose of Hexiano is the keyboard interface.
+- StarChord used as a host for an external Midi keyboard. I see no objection if someone contributes such a code, but it's not part of the roadmap, there are plenty of other softwares that can do that, and the main purpose of StarChord is the keyboard interface.

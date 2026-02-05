@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+
+	<!--
+	*****************
+	  PACKAGE INFOS
+	*****************
+	-->
+	<string name="url">https://www.github.com/lrq3000/starchord</string>
+	<string name="contact">lrq3000@gmail.com</string>
+	<string name="app_name">StarChord</string>
+
+
+	<!--
+	******************** 
+	  SYSTEM CONSTANTS
+	********************
+	-->
+	<string-array name="base_notes">
+		<item>C</item>
+		<item>C#</item>
+		<item>D</item>
+		<item>D#</item>
+		<item>E</item>
+		<item>F</item>
+		<item>F#</item>
+		<item>G</item>
+		<item>G#</item>
+		<item>A</item>
+		<item>A#</item>
+		<item>B</item>
+	</string-array>
+	<string-array name="color_schemes">
+		<item>Black &amp; White</item>
+		<item>Azure</item>
+		<item>Slate</item>
+		<item>Silhouette</item>
+		<item>Grey &amp; White</item>
+		<item>Ebony &amp; Ivory</item>
+		<item>Khaki</item>
+		<item>Blank</item>
+	</string-array>
+	<string-array name="instruments">
+		<item>Piano</item>
+		<item>DUMMY (dont choose)</item>
+	</string-array>
+	<string-array name="layouts">
+		<item>Jammer</item>
+		<item>Sonome</item>
+		<item>Janko</item>
+	</string-array>
+	<string-array name="key_labels">
+		<item>English</item>
+		<item>Deutsch</item>
+		<item>MIDI Note Number</item>
+		<item>None</item>
+		<item>Solfege</item>
+		<item>Whole Tone Number</item>
+		<item>Key Number (DEV)</item>
+	</string-array>
+	<string-array name="base_octaves">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+		<item>6</item>
+		<item>7</item>
+		<item>8</item>
+	</string-array>
+	<string-array name="janko_row_counts">
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+		<item>6</item>
+	</string-array>
+	<string-array name="orientations"> <!-- Screen orientation -->
+		<item>Landscape</item>
+		<item>Portrait</item>
+	</string-array>
+	<string-array name="key_orientations"> <!-- Keys orientation (how are oriented the hexagons) -->
+		<item>Horizontal</item>
+		<item>Vertical</item>
+	</string-array>
+	<string name="sustain_key">Sustain</string>
+	
+	<!--
+	******************
+	  DEFAULT VALUES
+	******************
+	-->
+	<integer name="default_polyphony_count">8</integer>
+	<string name="default_color_scheme">Azure</string>
+	<string name="default_instrument">Piano</string>
+	<string name="default_layout">Jammer</string>
+	<string name="default_sonome_note">E</string>
+	<string name="default_sonome_octave">1</string>
+	<string name="default_jammer_note">F#</string>
+	<string name="default_jammer_octave">6</string>
+	<string name="default_janko_note">F</string>
+	<string name="default_janko_octave">5</string>
+	<string name="default_janko_row_count">4</string>
+	<string name="default_sonome_orientation">Portrait</string>
+	<string name="default_jammer_orientation">Landscape</string>
+	<string name="default_janko_orientation">Landscape</string>
+	<string name="default_sonome_key_orientation">Vertical</string>
+	<string name="default_jammer_key_orientation">Horizontal</string>
+	<string name="default_janko_key_orientation">Horizontal</string>
+
+
+	<!--
+	*******************
+	  CONTEXTUAL MENU
+	*******************
+	-->
+	<string name="prompt_about">About StarChord</string>
+	<string name="prompt_license">License</string>
+	<string name="prompt_quit">Exit</string>
+
+	<!-- Contextual menu: About -->
+	<string name="copyright">StarChord, copyleft 2013-2026 Stephen Karl Larroque, copyleft 2013 Skriptico, 2012 by James Haigh, copyright © 2011-2012 by David A. Randolph.</string>
+	<string name="description">StarChord is an open-source isomorphic musical keyboard. All intervals, chords, and scales have identical patterns, regardless of the key in which one plays. StarChord aims to deliver the isomorphic keyboard concept to Android users. See http://www.altkeyboards.com/ for more information about these instruments.</string>
+	<string name="open_source">Source code for StarChord is available at https://github.com/lrq3000/starchord under the terms of GNU General Public License (version 3).</string>
+	<string name="license">This program is free software; you can redistribute it and/or modify it under the
+	terms of the GNU General Public License as published by the Free Software Foundation;
+	either version 3 of the License, or (at your option) any later version.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	For the complete license, see http://www.gnu.org/licenses/.</string>
+	<string name="credit_piano">Sounds from the acoustic grand piano soundfont (Yamaha Disklavier Pro), release 2008-09-10,
+by Roberto Gordo Saez (roberto.gordo@gmail.com), were adapted for use in StarChord. (See http://zenvoid.org/audio.html.)
+Specifically, we translated a set of files (mostly from the third velocity layer) from the soundfont into Ogg Vorbis format, with
+a rather drastic loss of fidelity. Please do not take the StarChord piano sound as representative
+of the quality of this excellent soundfont. It just helped to start from a high-quality source.
+
+This soundfont was built using the Zenph Studios Yamaha Disklavier Pro Piano Multisamples for OLPC,
+which was created by Dr. Mikhail Krishtal, Director of Music Research and Production, and
+his team at Zenph Studios.
+
+Neither Dr. Krishtal nor Mr. Saez in any way endorse StarChord. Their work is used under the terms of the Creative 
+Commons Attribution 3.0 license. See http://creativecommons.org/licenses/by/3.0 for details.
+</string>
+	 <string name="credit_osc">\n----\nJava OSC Library provided by Illposed Software: http://www.illposed.com/software/javaosc.html
+\nGreat thanks to Ahmet Kizilay for freeing the source of his app QuickOsc, which provided inspiration for the OSC/MIDI feature: https://github.com/artsince/QuickOSC
+\n\nNone of the persons mentioned above endorse StarChord in any way.
+</string>
+
+
+	<!--
+	***************
+	  PREFERENCES
+	***************
+	-->
+	<string name="prompt_preferences">Preferences</string>
+	<string name="prompt_inneract">Support StarChord</string>
+
+	<!-- Layout  (fine-tuning settings per keyboard type) -->
+	<string name="heading_appearance">Appearance</string>
+	<string name="heading_jammer">Jammer (Wicki-Hayden)</string>
+	<string name="heading_sonome">Sonome (Harmonic Table)</string>
+	<string name="heading_janko">Janko</string>
+	<string name="prompt_orientation">Orientation</string>
+	<string name="prompt_key_orientation">Key Orientation</string>
+	<string name="summary_key_orientation">Horizontal keys "point up and down"; vertical keys "point left and right."</string>
+	<string name="prompt_landscape_labels">Landscape</string>
+	<string name="summary_landscape">Do you want to play looking at a landscape (wide) display?</string>
+	<string name="prompt_janko_row_count">Rows per Octave</string>
+	<string name="summary_janko_row_count">Number of rows of whole-step keys to include for each octave.</string>
+	<string name="prompt_lowest_note">Lowest Note</string>
+	<string name="summary_lowest_note">The lowest playable note to include.</string>
+	<string name="prompt_lowest_note_octave">Lowest Note Octave</string>
+	<string name="summary_lowest_note_octave">The octave of the lowest playable note to include.</string>
+	<string name="prompt_highest_note">Highest Note</string>
+	<string name="summary_highest_note">The highest playable note to include.</string>
+	<string name="prompt_highest_note_octave">Highest Note Octave</string>
+	<string name="summary_highest_note_octave">The octave of the highest note to include.</string>
+	<string name="prompt_single_touch_chording">Single-touch Chording</string> <!-- Only for Jammer, but you can get the same effect by tweaking Key Touch Surface -->
+	<string name="summary_single_touch_chording">Play adjacent notes with one finger (4ths and 5ths).</string>
+
+	<!-- General -->
+	<string name="heading_general">General</string>
+	<string name="prompt_layout">Layout</string>
+	<string name="summary_layout">What note arrangement on the keys do you want to use?</string>
+	<string name="prompt_color_scheme">Colour Scheme</string>
+	<string name="summary_color_scheme">What colours do you want to see?</string>
+	<string name="prompt_label_type">Labels</string>
+	<string name="summary_label_type">What labels do you want to see on the keys?</string>
+	<string name="prompt_scale">Key Size</string>
+	<string name="summary_scale">Enter percentage to scale keys. Default=100. Smaller numbers shrink keys. Larger numbers expand them.</string>
+	<string name="prompt_touch_scale">Key Touch Surface</string>
+	<string name="summary_touch_scale">Enter percentage to scale touch surface. Default=100. Below creates gap between keys (enhance precision), above creates note overlap (trigger chords with 1 touch).</string>
+
+		<!-- Modifier Keys subscreen -->
+		<string name="prompt_hide_modifiers">Hide Modifiers</string>
+		<string name="summary_hide_modifiers">Hide all modifier keys (replaced by notes, useful for small screens)</string>
+		<string name="prompt_hold_sustain">Hold Sustain</string>
+		<string name="summary_hold_sustain">Hold sustain modifier when pressed until pressed again.</string>
+		<string name="prompt_sustain_always_on">Sustain always on</string>
+		<string name="summary_sustain_always_on">Always enable sustain.</string>
+
+		<!-- Velocity subscreen -->
+		<string name="prompt_velocity_enabled">Enable velocity sensitivity</string>
+		<string name="summary_velocity_enabled">Play notes louder when you press harder on the screen. Also works while swiping. Note: may not work on all phones.</string>
+		<string name="prompt_velocity_relative_range">Velocity relative range</string>
+		<string name="summary_velocity_relative_range">Absolute range = 0&#8211;127, relative range = min midi note velocity &#8211; max midi note velocity (change for each note!)</string>
+		<string name="prompt_velocity_boost">Velocity Boost</string>
+		<string name="summary_velocity_boost">Enter percentage to boost velocity. 0 disables boosting, higher boost volume of velocity by this percentage.</string>
+
+		<!-- Instrument and Multi-instruments subscreen -->
+		<string name="prompt_instrument">Instrument</string>
+		<string name="summary_instrument">What sounds do you want to hear?</string>
+		<string name="heading_multiInstruments">List of instruments</string>
+		<string name="prompt_multi_instruments_enable">Enable Multi Instruments</string>
+		<string name="summary_multi_instruments_enable">Use multiple instruments mapped on different keys/rows/columns</string>
+		<string name="prompt_multi_instruments_range">Range</string>
+		<string name="summary_multi_instruments_range">Choose keys that will play this instrument (Key/Column/Row separated by comma, eg: K17&#8211;19 or C1&#8211;3 or R1&#8211;2)</string>
+		<string name="prompt_multi_instruments_keep_base_note_octave">Use layout base note and octave</string>
+		<string name="summary_multi_instruments_keep_base_note_octave">Use the same base note and octave as the whole layout (skip the two next settings)</string>
+		<string name="prompt_multi_instruments_orderid">Order ID</string>
+		<string name="summary_multi_instruments_orderid">Priority of this instrument (will overwrite keys notes of other lower ID instruments)</string>
+		<string name="multi_instruments_add_screen_title_add">Add instrument</string>
+		<string name="multi_instruments_add_screen_title_edit">Edit instrument</string>
+		<string name="multi_instruments_profile_save">Save mapping</string>
+		<string name="multi_instruments_profile_load">Load mapping</string>
+		<string name="multi_instruments_profile_delete">Delete mapping</string>
+		<string name="multi_instruments_clear_mapping">Clear current mapping</string>
+
+	<!--  Advanced -->
+	<string name="prompt_polyphony_count">Polyphony count</string>
+	<string name="summary_polyphony_count">Max number of concurrent sounds (warning: high value may induce jitter!)</string>
+	<string name="prompt_sounds_limit_range">Limit sounds notes range</string>
+	<string name="summary_sounds_limit_range">Do not load sounds for notes that are not visible (optimize memory, critical for multi instruments)</string>
+
+
+	<!--
+	******************
+	  TOAST MESSAGES
+	******************
+	-->
+	<string name="error_no_soundfiles">Error: no sound files could be found for this instrument. Check that they have the correct format (anything_mxxvyy.ext where xx is midi note number and yy velocity)</string>
+	<string name="error_no_first_sound">Error: Cannot load the first sound for any instrument! Please check your multi-instruments settings!</string>
+	<string name="finished_loading">Finished loading instrument(s)!</string>
+	<string name="beginning_loading">Begin loading instrument(s), please wait&#8230;</string>
+	<string name="warning_rate_out_of_range">Warning: some extrapolated notes may not work (having a rate below 0.5 and above 2.0). Please add at least one sample sound per octave.</string>
+	<string name="warning_rate_out_of_range_min">Warning: some extrapolated notes may not work (having a rate below 0.5). Please add at least one sample sound per octave.</string>
+	<string name="warning_rate_out_of_range_max">Warning: some extrapolated notes may not work (having a rate above 2.0). Please add at least one sample sound per octave.</string>
+
+
+	<!--
+	***********
+	  GENERIC
+	***********
+	-->
+	<string name="none">None</string>
+	<string name="ok">OK</string>
+	<string name="add">Add</string>
+	<string name="edit">Edit</string>
+	<string name="delete">Delete</string>
+	<string name="save">Save</string>
+	<string name="cancel">Cancel</string>
+	<string name="version">version</string>
+	<string name="distribution"></string>
+</resources>

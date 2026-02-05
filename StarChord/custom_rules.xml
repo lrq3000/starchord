@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NOTE: Must be run from basedir="../StarChord/build/" in build.xml. -->
+<project name="custom_rules" default="debug">
+	<target name="filter-package">
+		<!-- FIXME: AndroidManifest.xml is referenced /before/ -pre-build! -->
+		<fail unless="app.packagename" message="Please define app.packagename in your local.properties file." />
+		<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+			<classpath>
+				<pathelement location="/usr/share/java/ant-contrib.jar"/>
+			</classpath>
+		</taskdef>
+		<!--
+		<fail unless="propertyregex" message="Depends on ant-contrib's propertyregex for app.packagename.path." />
+		-->
+		<propertyregex property="app.packagename.path"
+			input="${app.packagename}/"
+			regexp="\."
+			replace="/"
+			global="true"
+		/>
+		<copy todir="../build/" overwrite="true" encoding="utf-8">
+			<fileset dir="../">
+				<include name="res/**" />
+				<include name="libs/**" />
+			</fileset>
+		</copy>
+		<copy todir="../build/" overwrite="true" encoding="utf-8">
+			<fileset dir="../">
+				<include name="AndroidManifest.xml" />
+				<include name="res/**/*.xml" />
+			</fileset>
+			<filterset>
+				<filter token="CONFIG.APP_PACKAGE_NAME" value="${app.packagename}" />
+				<!--
+				<filter token="CONFIG.APP_VERSION" value="${app.version}" />
+				<filter token="CONFIG.APP_VERSION_CODE" value="${app.versioncode}" />
+				-->
+			</filterset>
+		</copy>
+		<copy todir="../build/src/${app.packagename.path}" overwrite="true" encoding="utf-8">
+			<fileset dir="../src/main/java/opensource/starchord/">
+				<include name="**.java" />
+			</fileset>
+			<filterset>
+				<filter token="CONFIG.APP_PACKAGE_NAME" value="${app.packagename}" />
+			</filterset>
+		</copy>
+	</target>
+    <target name="-pre-clean" description="Removes output files created by -pre-build.">
+        <delete file="../build/AndroidManifest.xml" verbose="${verbose}" />
+        <delete dir="../build/res/" verbose="${verbose}" />
+        <delete dir="../build/libs/" verbose="${verbose}" />
+        <delete dir="../build/src/" verbose="${verbose}" />
+    </target>
+</project>
