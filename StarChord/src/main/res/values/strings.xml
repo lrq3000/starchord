@@ -48,6 +48,7 @@
 		<item>Jammer</item>
 		<item>Sonome</item>
 		<item>Janko</item>
+		<item>Custom</item>
 	</string-array>
 	<string-array name="key_labels">
 		<item>English</item>
@@ -108,6 +109,10 @@
 	<string name="default_sonome_key_orientation">Vertical</string>
 	<string name="default_jammer_key_orientation">Horizontal</string>
 	<string name="default_janko_key_orientation">Horizontal</string>
+	<string name="default_custom_note">C</string>
+	<string name="default_custom_octave">3</string>
+	<string name="default_custom_orientation">Landscape</string>
+	<string name="default_custom_key_orientation">Horizontal</string>
 
 
 	<!--
@@ -162,6 +167,7 @@ Commons Attribution 3.0 license. See http://creativecommons.org/licenses/by/3.0 
 	<string name="heading_jammer">Jammer (Wicki-Hayden)</string>
 	<string name="heading_sonome">Sonome (Harmonic Table)</string>
 	<string name="heading_janko">Janko</string>
+	<string name="heading_custom">Custom</string>
 	<string name="prompt_orientation">Orientation</string>
 	<string name="prompt_key_orientation">Key Orientation</string>
 	<string name="summary_key_orientation">Horizontal keys "point up and down"; vertical keys "point left and right."</string>
@@ -179,6 +185,18 @@ Commons Attribution 3.0 license. See http://creativecommons.org/licenses/by/3.0 
 	<string name="summary_highest_note_octave">The octave of the highest note to include.</string>
 	<string name="prompt_single_touch_chording">Single-touch Chording</string> <!-- Only for Jammer, but you can get the same effect by tweaking Key Touch Surface -->
 	<string name="summary_single_touch_chording">Play adjacent notes with one finger (4ths and 5ths).</string>
+
+	<!-- Custom Layout -->
+	<string name="prompt_custom_step_1">Step 1 (Kitty)</string>
+	<string name="summary_custom_step_1">Interval from Kitty to Main Key.</string>
+	<string name="prompt_custom_step_2">Step 2 (Next Main)</string>
+	<string name="summary_custom_step_2">Interval from Main to Next Kitty Key.</string>
+	<string name="prompt_custom_step_post">Step Post (Next Row/Col)</string>
+	<string name="summary_custom_step_post">Interval to next row/column.</string>
+	<string name="prompt_custom_group_size">Group Size</string>
+	<string name="summary_custom_group_size">Number of columns (Vertical) or rows (Horizontal) before a pitch jump/group change. 0 to disable.</string>
+	<string name="prompt_custom_group_jump">Group Jump</string>
+	<string name="summary_custom_group_jump">Pitch change when wrapping a group (e.g. -12 for Janko Horizontal).</string>
 
 	<!-- General -->
 	<string name="heading_general">General</string>
