@@ -256,7 +256,8 @@ public abstract class HexKey
 		else if (layoutPref.equals("Custom")) // Custom
 		{
 			mKeyOverlap = false;
-			return mPrefs.getString("customKeyOrientation", null);
+			boolean isLandscape = mPrefs.getBoolean("landscape", true);
+			return isLandscape ? "Horizontal" : "Vertical";
 		}
 		else // Jammer
 		{

@@ -186,18 +186,12 @@ Commons Attribution 3.0 license. See http://creativecommons.org/licenses/by/3.0 
 	<string name="summary_single_touch_chording">Play adjacent notes with one finger (4ths and 5ths).</string>
 
 	<!-- Custom Layout -->
-	<string name="prompt_custom_step_v1">Vertical: Step Up-Right</string>
-	<string name="summary_custom_step_v1">Interval from Kitty to Main Key in Vertical mode.</string>
-	<string name="prompt_custom_step_v2">Vertical: Step Down-Right</string>
-	<string name="summary_custom_step_v2">Interval from Main to Next Kitty Key in Vertical mode.</string>
-	<string name="prompt_custom_step_vpost">Vertical: Step Down</string>
-	<string name="summary_custom_step_vpost">Interval to next row in Vertical mode.</string>
-	<string name="prompt_custom_step_h1">Horizontal: Step Up-Right</string>
-	<string name="summary_custom_step_h1">Interval from Kitty to Main Key in Horizontal mode.</string>
-	<string name="prompt_custom_step_h2">Horizontal: Step Down-Right</string>
-	<string name="summary_custom_step_h2">Interval from Main to Next Kitty Key in Horizontal mode.</string>
-	<string name="prompt_custom_step_hpost">Horizontal: Step Down</string>
-	<string name="summary_custom_step_hpost">Interval to next row in Horizontal mode.</string>
+	<string name="prompt_custom_step_1">Step 1 (Kitty)</string>
+	<string name="summary_custom_step_1">Interval from Kitty to Main Key.</string>
+	<string name="prompt_custom_step_2">Step 2 (Next Main)</string>
+	<string name="summary_custom_step_2">Interval from Main to Next Kitty Key.</string>
+	<string name="prompt_custom_step_post">Step Post (Next Row/Col)</string>
+	<string name="summary_custom_step_post">Interval to next row/column.</string>
 	<string name="prompt_custom_group_size">Group Size</string>
 	<string name="summary_custom_group_size">Number of columns (Vertical) or rows (Horizontal) before a pitch jump/group change. 0 to disable.</string>
 	<string name="prompt_custom_group_jump">Group Jump</string>

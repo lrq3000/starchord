@@ -119,33 +119,12 @@ public class Play extends Activity implements OnSharedPreferenceChangeListener
 
 	protected int setOrientation()
 	{
-		String layout = mPrefs.getString("layout", null);
-
 		int orientationId = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
 
-		if (layout.equals("Sonome"))
+		boolean isLandscape = mPrefs.getBoolean("landscape", true);
+		if (! isLandscape)
 		{
-			boolean isLandscape = mPrefs.getBoolean("sonomeLandscape", false);
-			if (! isLandscape)
-			{
-				orientationId = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
-			}
-		}
-		else if (layout.equals("Jammer"))
-		{
-			boolean isLandscape = mPrefs.getBoolean("jammerLandscape", false);
-			if (! isLandscape)
-			{
-				orientationId = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
-			}
-		}
-		else if (layout.equals("Janko"))
-		{
-			boolean isLandscape = mPrefs.getBoolean("jankoLandscape", false);
-			if (! isLandscape)
-			{
-				orientationId = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
-			}
+			orientationId = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
 		}
 
 		this.setRequestedOrientation(orientationId);
