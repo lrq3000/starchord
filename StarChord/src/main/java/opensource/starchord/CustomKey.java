@@ -14,7 +14,20 @@ public class CustomKey extends HexKey
 	protected void getPrefs()
 	{
         // Base implementation handles global keyOrientation and keyOverlap
-        super.getPrefs();
+        // Explicitly ensuring no NPE if super fails or if prefs are weird
+        if (mPrefs != null) {
+            String orientation = mPrefs.getString("keyOrientation", "Horizontal");
+            if (orientation == null) {
+                mKeyOrientation = "Horizontal";
+            } else {
+                mKeyOrientation = orientation;
+            }
+            // Ensure keyOverlap is also set safely if needed
+            mKeyOverlap = mPrefs.getBoolean("keyOverlap", false);
+        } else {
+            // Should not happen as mPrefs is static and init in constructor
+            mKeyOrientation = "Horizontal";
+        }
 	}
 
 	@Override
@@ -25,10 +38,7 @@ public class CustomKey extends HexKey
 		if (sharpName.contains("#"))
 		{
 			color = mBlackColor;
-			if (sharpName.contains("G"))
-			{
-				// Standard piano coloring for now
-			}
+			// G# highlighting removed as requested (dead code)
 		}
 		else if (sharpName.contains("C"))
 		{

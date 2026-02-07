@@ -482,7 +482,10 @@ public class HexKeyboard extends View
 				rowFirstPitch = pitch;
 				y += 3 * mTileRadius;
 				
+				// Account for both regular keys and kitty-corner keys in the row count
 				rowCounter += 2;
+				// Group jump is intentionally applied after completing a row (not per-column) due to the hex grid layout.
+				// This affects pitch progression differently than vertical grouping.
 				if (params.groupSize > 0 && rowCounter % params.groupSize == 0)
 				{
 				    pitch += params.groupJumpPitch;

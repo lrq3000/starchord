@@ -21,19 +21,13 @@ public class LayoutStrategies {
 
         @Override
         public Parameters getParameters(Context context, SharedPreferences prefs, String orientation, int rowCount, int columnCount) {
-            Parameters p = new Parameters();
+            Parameters.Builder b = new Parameters.Builder();
             if (orientation.equals("Vertical")) {
-                p.pitch1 = -5;
-                p.pitch2 = -7;
-                p.pitchPost = -2;
-                p.pitchPre = 0;
+                b.pitch1(-5).pitch2(-7).pitchPost(-2).pitchPre(0);
             } else {
-                p.pitchPre = -(rowCount - 1) * 2;
-                p.pitch1 = -5;
-                p.pitch2 = 7;
-                p.pitchPost = -12;
+                b.pitchPre(-(rowCount - 1) * 2).pitch1(-5).pitch2(7).pitchPost(-12);
             }
-            return p;
+            return b.build();
         }
 
         @Override
@@ -48,18 +42,13 @@ public class LayoutStrategies {
 
         @Override
         public Parameters getParameters(Context context, SharedPreferences prefs, String orientation, int rowCount, int columnCount) {
-            Parameters p = new Parameters();
+            Parameters.Builder b = new Parameters.Builder();
             if (orientation.equals("Vertical")) {
-                p.pitchPre = (rowCount - 1) * 7;
-                p.pitch1 = 4;
-                p.pitch2 = -3;
-                p.pitchPost = -7;
+                b.pitchPre((rowCount - 1) * 7).pitch1(4).pitch2(-3).pitchPost(-7);
             } else {
-                p.pitch1 = 4;
-                p.pitch2 = 3;
-                p.pitchPost = 1;
+                b.pitch1(4).pitch2(3).pitchPost(1);
             }
-            return p;
+            return b.build();
         }
 
         @Override
@@ -74,34 +63,27 @@ public class LayoutStrategies {
 
         @Override
         public Parameters getParameters(Context context, SharedPreferences prefs, String orientation, int rowCount, int columnCount) {
-            Parameters p = new Parameters();
+            Parameters.Builder b = new Parameters.Builder();
 
             // Janko initial pitch offset
-            p.initialPitchOffset = -((columnCount - 1) * 2 - 1);
+            b.initialPitchOffset(-((columnCount - 1) * 2 - 1));
 
             String groupSizeStr = prefs.getString("jankoRowCount", "4");
             // Sanitize
             groupSizeStr = groupSizeStr.replaceAll("[^0-9]", "");
             if (groupSizeStr.length() == 0) groupSizeStr = "4";
             int groupSize = Integer.parseInt(groupSizeStr);
-            p.groupSize = groupSize;
+            b.groupSize(groupSize);
 
             int groupCount = columnCount / groupSize;
             if (columnCount % groupSize > 0) groupCount++;
 
             if (orientation.equals("Vertical")) {
-                p.pitchPre = -(groupCount - 1) * 12;
-                p.pitch1 = -1;
-                p.pitch2 = 1;
-                p.pitchPost = 2;
-                p.groupJumpPitch = 0;
+                b.pitchPre(-(groupCount - 1) * 12).pitch1(-1).pitch2(1).pitchPost(2).groupJumpPitch(0);
             } else {
-                p.pitch1 = 1;
-                p.pitch2 = 1;
-                p.pitchPost = 0;
-                p.groupJumpPitch = -12;
+                b.pitch1(1).pitch2(1).pitchPost(0).groupJumpPitch(-12);
             }
-            return p;
+            return b.build();
         }
 
         @Override
@@ -120,45 +102,45 @@ public class LayoutStrategies {
 
         @Override
         public Parameters getParameters(Context context, SharedPreferences prefs, String orientation, int rowCount, int columnCount) {
-            Parameters p = new Parameters();
+            Parameters.Builder b = new Parameters.Builder();
             // Defaults
-            p.pitch1 = 1;
-            p.pitch2 = 1;
-            p.pitchPost = 1;
-            p.pitchPre = 0;
+            b.pitch1(1).pitch2(1).pitchPost(1).pitchPre(0);
 
             try {
                 // Same steps regardless of orientation
-                p.pitch1 = Integer.parseInt(prefs.getString("customStep1", "1"));
-                p.pitch2 = Integer.parseInt(prefs.getString("customStep2", "1"));
-                p.pitchPost = Integer.parseInt(prefs.getString("customStepPost", "1"));
+                b.pitch1(Integer.parseInt(prefs.getString("customStep1", "1")));
+                b.pitch2(Integer.parseInt(prefs.getString("customStep2", "1")));
+                b.pitchPost(Integer.parseInt(prefs.getString("customStepPost", "1")));
 
+                int groupSize = 0;
                 String groupSizeStr = prefs.getString("customGroupSize", "0");
                 groupSizeStr = groupSizeStr.replaceAll("[^0-9]", "");
                 if (groupSizeStr.length() > 0) {
-                    p.groupSize = Integer.parseInt(groupSizeStr);
+                    groupSize = Integer.parseInt(groupSizeStr);
+                    b.groupSize(groupSize);
                 }
 
                 String groupJumpStr = prefs.getString("customGroupJump", "-12");
                 // Allow negative
                 // groupJumpStr might contain '-'
                 try {
-                    p.groupJumpPitch = Integer.parseInt(groupJumpStr);
+                    b.groupJumpPitch(Integer.parseInt(groupJumpStr));
                 } catch (NumberFormatException e) {
-                    p.groupJumpPitch = -12;
+                    b.groupJumpPitch(-12);
                 }
 
-                if (p.groupSize > 0 && orientation.equals("Vertical")) {
-                    int groupCount = columnCount / p.groupSize;
-                    if (columnCount % p.groupSize > 0) groupCount++;
-                    // Custom logic for pitchPre could be added here if needed, but omitted for now as per plan
+                if (groupSize > 0 && orientation.equals("Vertical")) {
+                    int groupCount = columnCount / groupSize;
+                    if (columnCount % groupSize > 0) groupCount++;
+                    // TODO: consider Janko-like pitchPre adjustment
+                    b.pitchPre(0); // Explicitly set to 0 as requested
                 }
 
             } catch (NumberFormatException e) {
                 // Ignore, use defaults
             }
 
-            return p;
+            return b.build();
         }
 
         @Override
