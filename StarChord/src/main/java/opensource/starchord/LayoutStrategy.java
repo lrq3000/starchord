@@ -16,5 +16,5 @@ public interface LayoutStrategy {
 
     String getName();
     Parameters getParameters(Context context, SharedPreferences prefs, String orientation, int rowCount, int columnCount);
-    HexKey createKey(Context context, int radius, Point center, int pitch, Instrument instru, int keyCount, int groupNum);
+    HexKey createKey(Context context, int radius, Point center, int pitch, Instrument instru, int keyCount, int groupNum, String orientation);
 }

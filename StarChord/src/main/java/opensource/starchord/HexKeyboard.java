@@ -275,7 +275,8 @@ public class HexKeyboard extends View
 								ipitch,
 								instru,
 								++keyCount,
-                                octaveGroupNumber);
+                                octaveGroupNumber,
+                                orientation);
 
 					if (kittyCornerKey.isKeyVisible()) {
 						mKeys.add(kittyCornerKey);
@@ -324,7 +325,8 @@ public class HexKeyboard extends View
 								ipitch,
 								instru,
 								++keyCount,
-                                octaveGroupNumber);
+                                octaveGroupNumber,
+                                orientation);
 
 					if (key.isKeyVisible()) {
 						mKeys.add(key);
@@ -405,7 +407,8 @@ public class HexKeyboard extends View
 								ipitch,
 								instru,
 								++keyCount,
-                                octaveGroupNumber);
+                                octaveGroupNumber,
+                                orientation);
 					
 					if (kittyCornerKey.isKeyVisible()) {
 						mKeys.add(kittyCornerKey);
@@ -458,7 +461,8 @@ public class HexKeyboard extends View
 								jpitch,
 								instru,
 								++keyCount,
-                                ogn);
+                                ogn,
+                                orientation);
 
 					if (key.isKeyVisible()) {
 						mKeys.add(key);

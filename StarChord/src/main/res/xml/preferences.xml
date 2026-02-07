@@ -4,6 +4,8 @@
 		<PreferenceCategory android:title="@string/heading_general" android:key="general">
 			<ListPreference android:title="@string/prompt_layout" android:defaultValue="@string/default_layout" android:entryValues="@array/layouts" android:key="layout" android:entries="@array/layouts" android:enabled="true" android:selectable="true" android:summary="@string/summary_layout"/>
 			<CheckBoxPreference android:key="landscape" android:defaultValue="true" android:title="@string/prompt_landscape_labels" android:summary="@string/summary_landscape" />
+			<ListPreference android:defaultValue="@string/default_jammer_key_orientation" android:entryValues="@array/key_orientations" android:summary="@string/summary_key_orientation" android:key="keyOrientation" android:entries="@array/key_orientations" android:title="@string/prompt_key_orientation"/>
+			<CheckBoxPreference android:key="keyOverlap" android:defaultValue="false" android:title="@string/prompt_single_touch_chording" android:summary="@string/summary_single_touch_chording"/>
 			<ListPreference android:entries="@array/color_schemes"
 				android:selectable="true"
 				android:enabled="true"
@@ -50,18 +52,14 @@
 		<PreferenceCategory android:key="jammer" android:title="@string/heading_jammer">
 			<ListPreference android:title="@string/prompt_highest_note" android:entryValues="@array/base_notes" android:key="baseJammerNote" android:defaultValue="@string/default_jammer_note" android:entries="@array/base_notes" android:summary="@string/summary_highest_note"/>
 			<ListPreference android:entryValues="@array/base_octaves" android:key="baseJammerOctave" android:title="@string/prompt_highest_note_octave" android:defaultValue="@string/default_jammer_octave" android:entries="@array/base_octaves" android:summary="@string/summary_highest_note_octave"/>
-			<ListPreference android:defaultValue="@string/default_jammer_key_orientation" android:entryValues="@array/key_orientations" android:summary="@string/summary_key_orientation" android:key="jammerKeyOrientation" android:entries="@array/key_orientations" android:title="@string/prompt_key_orientation"/>
-			<CheckBoxPreference android:key="jammerKeyOverlap" android:defaultValue="false" android:title="@string/prompt_single_touch_chording" android:summary="@string/summary_single_touch_chording"/>
 		</PreferenceCategory>
 		<PreferenceCategory android:key="janko" android:title="@string/heading_janko">
 			<ListPreference android:defaultValue="@string/default_janko_note" android:entries="@array/base_notes" android:entryValues="@array/base_notes" android:title="@string/prompt_highest_note" android:key="baseJankoNote" android:summary="@string/summary_highest_note"/>
 			<ListPreference android:defaultValue="@string/default_janko_octave" android:entries="@array/base_octaves" android:entryValues="@array/base_octaves" android:title="@string/prompt_highest_note_octave" android:key="baseJankoOctave" android:summary="@string/summary_highest_note_octave"/>
-			<ListPreference android:defaultValue="@string/default_janko_key_orientation" android:title="@string/prompt_key_orientation" android:key="jankoKeyOrientation" android:summary="@string/summary_key_orientation" android:entries="@array/key_orientations" android:entryValues="@array/key_orientations"/>
 			<ListPreference android:key="jankoRowCount" android:defaultValue="@string/default_janko_row_count" android:entries="@array/janko_row_counts" android:entryValues="@array/janko_row_counts" android:title="@string/prompt_janko_row_count" android:summary="@string/summary_janko_row_count"/>
 		</PreferenceCategory><PreferenceCategory android:key="sonome" android:title="@string/heading_sonome">
 			<ListPreference android:title="@string/prompt_lowest_note" android:entryValues="@array/base_notes" android:key="baseSonomeNote" android:defaultValue="@string/default_sonome_note" android:entries="@array/base_notes" android:summary="@string/summary_lowest_note" />
 			<ListPreference android:entryValues="@array/base_octaves" android:key="baseSonomeOctave" android:title="@string/prompt_lowest_note_octave" android:defaultValue="@string/default_sonome_octave" android:entries="@array/base_octaves" android:summary="@string/summary_lowest_note_octave" />
-			<ListPreference android:defaultValue="@string/default_sonome_key_orientation" android:entryValues="@array/key_orientations" android:summary="@string/summary_key_orientation" android:key="sonomeKeyOrientation" android:entries="@array/key_orientations" android:title="@string/prompt_key_orientation" />
 		</PreferenceCategory>
 		<PreferenceCategory android:key="custom" android:title="@string/heading_custom">
 			<ListPreference android:defaultValue="@string/default_custom_note" android:entries="@array/base_notes" android:entryValues="@array/base_notes" android:title="@string/prompt_lowest_note" android:key="baseCustomNote" android:summary="@string/summary_lowest_note" />

@@ -81,7 +81,7 @@ public abstract class HexKey
 	public HexKey(Context context, int radius, Point center, int midiNoteNumber, Instrument instrument, int keyNumber)
 	{
 		mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-		getPrefs();
+		getPrefs(); // Subclasses can override, but base now handles global keyOrientation
 
 		setColors();
 
@@ -126,6 +126,19 @@ public abstract class HexKey
 
 	protected void getPrefs()
 	{
+        // Default implementation sets global preferences
+        // Layout-specific overrides can add to this or ignore if needed, but usually call super()
+        mKeyOrientation = mPrefs.getString("keyOrientation", "Horizontal");
+
+        // Handle Key Overlap (Single-touch chording)
+        // Previous logic: only Jammer allowed it.
+        // User asked to generalize it.
+        // It's now "keyOverlap" in preferences? Or we should check layout?
+        // "generalize options that are only available for some mappings"
+        // So I should read "keyOverlap" if I renamed it, or check "jammerKeyOverlap" if I didn't.
+        // I haven't renamed "jammerKeyOverlap" in XML yet. I will do that in the next plan step.
+        // Assuming I rename it to "keyOverlap":
+        mKeyOverlap = mPrefs.getBoolean("keyOverlap", false);
 	}
 
 	protected void setColors()
@@ -242,27 +255,10 @@ public abstract class HexKey
 	static public String getKeyOrientation(Context context)
 	{
 		mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-		String layoutPref = mPrefs.getString("layout", null);
-		if (layoutPref.equals("Sonome")) // Sonome
-		{
-			mKeyOverlap = false;
-			return mPrefs.getString("sonomeKeyOrientation", null);
-		}
-		else if (layoutPref.equals("Janko")) // Janko
-		{
-			mKeyOverlap = false;
-			return mPrefs.getString("jankoKeyOrientation", null);
-		}
-		else if (layoutPref.equals("Custom")) // Custom
-		{
-			mKeyOverlap = false;
-			boolean isLandscape = mPrefs.getBoolean("landscape", true);
-			return isLandscape ? "Horizontal" : "Vertical";
-		}
-		else // Jammer
-		{
-			return mPrefs.getString("jammerKeyOrientation", null);
-		}
+		// With global preference, we just read it.
+        // Static context: might not be in sync with instance creation if they use mPrefs
+        // But mPrefs is static in this class too.
+		return mPrefs.getString("keyOrientation", "Horizontal");
 	}
 	
 	protected Path getHexagonPath()

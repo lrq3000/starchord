@@ -42,7 +42,8 @@ public class JankoKey extends HexKey
 	@Override
 	protected void getPrefs()
 	{
-		mKeyOrientation = mPrefs.getString("jankoKeyOrientation", null);
+        // Base implementation handles global keyOrientation and keyOverlap
+        super.getPrefs();
 	}
 
 	private boolean inOddOctave()

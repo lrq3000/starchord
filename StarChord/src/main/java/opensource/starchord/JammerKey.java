@@ -39,8 +39,8 @@ public class JammerKey extends HexKey
 	@Override
 	protected void getPrefs()
 	{
-		mKeyOrientation = mPrefs.getString("jammerKeyOrientation", null);
-		mKeyOverlap = mPrefs.getBoolean("jammerKeyOverlap", false);
+        // Base implementation handles global keyOrientation and keyOverlap
+        super.getPrefs();
 	}
 
 	@Override

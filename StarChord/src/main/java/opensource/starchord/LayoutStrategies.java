@@ -37,7 +37,7 @@ public class LayoutStrategies {
         }
 
         @Override
-        public HexKey createKey(Context context, int radius, Point center, int pitch, Instrument instru, int keyCount, int groupNum) {
+        public HexKey createKey(Context context, int radius, Point center, int pitch, Instrument instru, int keyCount, int groupNum, String orientation) {
             return new JammerKey(context, radius, center, pitch, instru, keyCount);
         }
     }
@@ -63,7 +63,7 @@ public class LayoutStrategies {
         }
 
         @Override
-        public HexKey createKey(Context context, int radius, Point center, int pitch, Instrument instru, int keyCount, int groupNum) {
+        public HexKey createKey(Context context, int radius, Point center, int pitch, Instrument instru, int keyCount, int groupNum, String orientation) {
             return new SonomeKey(context, radius, center, pitch, instru, keyCount);
         }
     }
@@ -105,38 +105,8 @@ public class LayoutStrategies {
         }
 
         @Override
-        public HexKey createKey(Context context, int radius, Point center, int pitch, Instrument instru, int keyCount, int groupNum) {
-            // Vertical mode logic relies on adding 12 * groupNum here.
-            // Horizontal mode logic relies on pitch being shifted by 12, so groupNum impact here?
-            // Existing HexKeyboard logic for Horizontal:
-            //   key = new JankoKey(..., jpitch, ..., ogn);
-            //   where jpitch was decremented by 12.
-            //   So createKey should pass pitch as is.
-            // But JankoKey uses groupNum for Coloring.
-            // AND for Vertical, pitch is NOT shifted in the loop, but key adds 12*groupNum.
-            //
-            // We can detect orientation inside here via getKeyOrientation?
-            // Or assume the pitch passed in is the base pitch, and we modify it if needed?
-            //
-            // Vertical Loop passes 'ipitch' which is 'pitch'. 'pitch' is not jumped.
-            // So we need to add 12*groupNum.
-            //
-            // Horizontal Loop passes 'jpitch' which IS jumped.
-            // So we should NOT add 12*groupNum?
-            // But JankoKey constructor:
-            //   super(..., midiNoteNumber, ...);
-            // It doesn't modify midiNoteNumber.
-            // Wait, look at HexKeyboard.java again.
-
-            /*
-            Vertical:
-                key = new JankoKey(..., ipitch + 12 * octaveGroupNumber, ...);
-            Horizontal:
-                key = new JankoKey(..., jpitch, ...);
-            */
-
-            String orient = HexKey.getKeyOrientation(context); // Note: this uses static prefs lookup which handles Janko
-            if (orient.equals("Vertical")) {
+        public HexKey createKey(Context context, int radius, Point center, int pitch, Instrument instru, int keyCount, int groupNum, String orientation) {
+            if (orientation != null && orientation.equals("Vertical")) {
                 return new JankoKey(context, radius, center, pitch + 12 * groupNum, instru, keyCount, groupNum);
             } else {
                 return new JankoKey(context, radius, center, pitch, instru, keyCount, groupNum);
@@ -192,7 +162,7 @@ public class LayoutStrategies {
         }
 
         @Override
-        public HexKey createKey(Context context, int radius, Point center, int pitch, Instrument instru, int keyCount, int groupNum) {
+        public HexKey createKey(Context context, int radius, Point center, int pitch, Instrument instru, int keyCount, int groupNum, String orientation) {
             return new CustomKey(context, radius, center, pitch, instru, keyCount);
         }
     }

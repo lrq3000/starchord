@@ -13,8 +13,8 @@ public class CustomKey extends HexKey
 	@Override
 	protected void getPrefs()
 	{
-		mKeyOrientation = mPrefs.getString("customKeyOrientation", null);
-        // We could add customKeyOverlap if needed
+        // Base implementation handles global keyOrientation and keyOverlap
+        super.getPrefs();
 	}
 
 	@Override
@@ -27,14 +27,8 @@ public class CustomKey extends HexKey
 			color = mBlackColor;
 			if (sharpName.contains("G"))
 			{
-				// Mimic Jammer highlighting for now, or just standard black
-                // Maybe allow customization? For now, standard piano colors (Black/White).
-                // Jammer uses G# as Highlight.
-                // Standard piano has no highlight on black keys usually.
-                // But let's stick to Black/White logic.
-                // If I want to be safe, just standard.
+				// Standard piano coloring for now
 			}
-            // Some specific highlighting for roots (C)?
 		}
 		else if (sharpName.contains("C"))
 		{

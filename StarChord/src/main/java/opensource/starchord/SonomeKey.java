@@ -38,7 +38,8 @@ public class SonomeKey extends HexKey
 	@Override
 	protected void getPrefs()
 	{
-		mKeyOrientation = mPrefs.getString("sonomeKeyOrientation", null);
+        // Base implementation handles global keyOrientation and keyOverlap
+        super.getPrefs();
 	}
 
 	@Override
