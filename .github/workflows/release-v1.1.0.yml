@@ -1,0 +1,132 @@
+name: Recover v1.1.0 APK
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v1.1.0
+          persist-credentials: false
+
+      - name: Verify and repair release metadata from the exact tag
+        run: |
+          test "$(git rev-parse HEAD)" = 558273b7cc9a01d35763ed4f533fea289c2dab13
+          python3 - <<'PY'
+          from pathlib import Path
+          from xml.etree import ElementTree
+
+          gradle = Path('Hexiano/build.gradle.kts')
+          source = gradle.read_text()
+          replacements = {
+              'applicationId = "opensource.hexiano.Play"': 'applicationId = "opensource.hexiano"',
+              'versionCode = 15': 'versionCode = 16',
+              'versionName = "0.84 BETA"': 'versionName = "1.1.0"',
+          }
+          for old, new in replacements.items():
+              assert source.count(old) == 1, f'Unexpected tag metadata: {old}'
+              source = source.replace(old, new)
+          gradle.write_text(source)
+
+          manifest = Path('Hexiano/src/main/AndroidManifest.xml')
+          source = manifest.read_text()
+          old = '<!-- Define this in local.properties! -->"/>'
+          assert source.count(old) == 1, 'Unexpected tag manifest'
+          source = source.replace(old, '<!-- Define this in local.properties! -->')
+          ElementTree.fromstring(source)
+          manifest.write_text(source)
+          PY
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK components
+        run: sdkmanager 'platforms;android-34' 'build-tools;34.0.0'
+
+      - name: Build unsigned release APK
+        run: ./gradlew :Hexiano:assembleRelease --no-daemon
+
+      - name: Retrieve prior APK and inspect release identity
+        run: |
+          curl -fsSL --retry 3 -o previous.apk \
+            https://github.com/lrq3000/starchord/releases/download/v1.0.2/HexianoExtended_v1.0.2.apk
+          unzip -p previous.apk META-INF/CERT.RSA > previous-signature.p7b
+          openssl pkcs7 -inform DER -in previous-signature.p7b -print_certs -out previous-cert.pem
+          openssl x509 -in previous-cert.pem -outform DER -out previous-cert.der
+          echo "Previous signing certificate SHA-256: $(sha256sum previous-cert.der | cut -d' ' -f1)"
+          test "$(sha256sum previous-cert.der | cut -d' ' -f1)" = c3f567554b64139f031f5fe7fe35dc9d2fc6fd344ae19fc872a17f3efbf4cb02
+
+      - name: Require original signing credentials
+        env:
+          RELEASE_KEYSTORE_BASE64: ${{ secrets.HEXIANO_RELEASE_KEYSTORE_BASE64 }}
+          RELEASE_KEY_ALIAS: ${{ secrets.HEXIANO_RELEASE_KEY_ALIAS }}
+          RELEASE_KEYSTORE_PASSWORD: ${{ secrets.HEXIANO_RELEASE_KEYSTORE_PASSWORD }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.HEXIANO_RELEASE_KEY_PASSWORD }}
+        run: |
+          for name in RELEASE_KEYSTORE_BASE64 RELEASE_KEY_ALIAS RELEASE_KEYSTORE_PASSWORD RELEASE_KEY_PASSWORD; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Missing $name: the original v1.0.2 signing key is required"
+              exit 1
+            fi
+          done
+
+      - name: Align and sign with original key
+        env:
+          RELEASE_KEYSTORE_BASE64: ${{ secrets.HEXIANO_RELEASE_KEYSTORE_BASE64 }}
+          RELEASE_KEY_ALIAS: ${{ secrets.HEXIANO_RELEASE_KEY_ALIAS }}
+          RELEASE_KEYSTORE_PASSWORD: ${{ secrets.HEXIANO_RELEASE_KEYSTORE_PASSWORD }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.HEXIANO_RELEASE_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$RELEASE_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/release.jks"
+          chmod 600 "$RUNNER_TEMP/release.jks"
+          SDK_BIN="$ANDROID_HOME/build-tools/34.0.0"
+          "$SDK_BIN/zipalign" -f -p 4 \
+            Hexiano/build/outputs/apk/release/Hexiano-release-unsigned.apk \
+            "$RUNNER_TEMP/aligned.apk"
+          "$SDK_BIN/apksigner" sign --ks "$RUNNER_TEMP/release.jks" \
+            --ks-key-alias "$RELEASE_KEY_ALIAS" \
+            --ks-pass env:RELEASE_KEYSTORE_PASSWORD \
+            --key-pass env:RELEASE_KEY_PASSWORD \
+            --out HexianoExtended_v1.1.0.apk "$RUNNER_TEMP/aligned.apk"
+          "$SDK_BIN/apksigner" verify --verbose --print-certs HexianoExtended_v1.1.0.apk
+          "$SDK_BIN/zipalign" -c -p 4 HexianoExtended_v1.1.0.apk
+
+      - name: Verify package, version and signer against v1.0.2
+        run: |
+          set -euo pipefail
+          SDK_BIN="$ANDROID_HOME/build-tools/34.0.0"
+          "$SDK_BIN/aapt" dump badging previous.apk | head -1 | tee previous-package.txt
+          "$SDK_BIN/aapt" dump badging HexianoExtended_v1.1.0.apk | head -1 | tee new-package.txt
+          grep -q "name='opensource.hexiano' versionCode='14'" previous-package.txt
+          grep -q "name='opensource.hexiano' versionCode='16' versionName='1.1.0'" new-package.txt
+          "$SDK_BIN/apksigner" verify --print-certs HexianoExtended_v1.1.0.apk > new-signer.txt
+          grep -qi "Signer #1 certificate SHA-256 digest: c3f567554b64139f031f5fe7fe35dc9d2fc6fd344ae19fc872a17f3efbf4cb02" new-signer.txt
+
+      - name: Test in-place installation and launch
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 28
+          arch: x86_64
+          script: |
+            adb install previous.apk
+            adb install -r HexianoExtended_v1.1.0.apk
+            adb shell am start -W -n opensource.hexiano/opensource.hexiano.Play
+            sleep 5
+            adb shell pidof opensource.hexiano
+
+      - name: Attach verified APK to existing release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload v1.1.0 HexianoExtended_v1.1.0.apk --repo "$GITHUB_REPOSITORY"
